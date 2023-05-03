@@ -1,0 +1,91 @@
+﻿@using DemoWeb2.Models
+@model List<CartItem>
+@{
+    ViewBag.Title = "ConfirmCart";
+    Layout = "~/Views/Shared/_MasterLayout.cshtml";
+    Customer customer = Session["TaiKhoan"] as Customer;
+}
+<h2 style="text-align:center">CART INFO</h2>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>MÃ SẢN PHẨM</th>
+                <th>TÊN SẢN PHẨM</th>
+                <th>ẢNH</th>
+                <th>SỐ LƯỢNG</th>
+                <th>ĐƠN GIÁ</th>
+                <th>THÀNH TIỀN</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var product in Model)
+            {
+                <tr>
+                    <td>@product.ProductID</td>
+                    <td>@product.NamePro</td>
+                    <td><img src="~/Images/@product.ImagePro" style="width:100%" /></td>
+                    <td>@product.Number</td>
+                    <td>@String.Format("{0:#,##0}", product.Price) VNĐ</td>
+                    <td>@String.Format("{0:#,##0}", product.FinalPrice()) VNĐ</td>
+                </tr>
+            }
+            <tr style="font-weight:bold; text-align:right; color:red;">
+                <td colspan="4">Tổng số lượng: @ViewBag.TotalNumber</td>
+                <td colspan="5">Tổng tiền: @ViewBag.TotalPrice VNĐ</td>
+            </tr>
+        </tbody>
+    </table>
+    <h2 style="text-align:center">CUSTOMER INFO</h2>
+    <table class="table table-bordered">
+        <tr>
+            <td>Tên: </td>
+            <td>@customer.NameCus</td>
+        </tr>
+        <tr>
+            <td>Số điện thoại: </td>
+            <td>@customer.PhoneCus</td>
+        </tr>
+        <tr>
+            <td>Ngày đặt: </td>
+            <td>@DateTime.Now.ToShortDateString()</td>
+        </tr>
+        <tr>
+            <td colspan="2" style="text-align: center;">
+                @Html.ActionLink("Đặt hàng", "AgreeCart", null, new { @class = "btn btn-primary" })
+            </td>
+        </tr>
+    </table>
+
+@*
+        <!--@using (Html.BeginForm("AgreeCart", "Cart", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+
+        <h2 style="text-align:center">DELIVERY INFO</h2>
+        <div class="form-group">
+            @Html.LabelFor(model => model.AddressDeliverry, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.AddressDeliverry, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.AddressDeliverry, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <h2 style="text-align:center">CART INFO</h2>
+        <table class="table table-bordered">-->-->
+             @*code cũ*@
+<!--</table>
+
+<h2 style="text-align:center">CUSTOMER INFO</h2>
+<table class="table table-bordered">-->
+@*code cũ*@
+<!--</table>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Đặt hàng" class="btn btn-primary" />
+        </div>
+    </div>
+}-->
+*@
+
+

@@ -1,0 +1,72 @@
+﻿
+@{
+    ViewBag.Title = "DangKy";
+    Layout = "~/Views/Shared/_MasterLayout.cshtml";
+}
+<div id="div-form">
+    <h2 style="text-align:center;">ĐĂNG KÝ TÀI KHOẢN</h2>
+    <form action="#" method="post" name="frmDK" style="margin:50px">
+        <div id="div-thongtin">
+            <fieldset style="width: 50%">
+                <legend>Thông tin cá nhân</legend>
+                <table>
+                    <tr>
+                        <td>
+                            <label for="hoten">Họ tên: </label>
+                        </td>
+                        <td>
+                            <input type="text" id="hoten" name="hoten" placeholder="Nhập họ tên ..." />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="matkhau">Mật khẩu: </label>
+                        </td>
+                        <td>
+                            <input type="password" id="matkhau" name="matkhau" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="diachi">Địa chỉ: </label>
+                        </td>
+                        <td>
+                            <select name="diachi">
+                                <option value="1">TP.HCM</option>
+                                <option value="2">Hà nội</option>
+                                <option value="3">Huế</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="email">Email: </label>
+                        </td>
+                        <td>
+                            <input type="email" id="email" name="email" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="cannang">Cân nặng: </label>
+                        </td>
+                        <td>
+                            <input type="text" id="cannang" name="cannang" />
+                        </td>
+                    </tr>
+                </table>
+                <fieldset style="width: 50%">
+                    <legend>Sở thích</legend>
+                    <input type="checkbox" id="dabanh" name="dabanh" value="dabanh">
+                    <label for="dabanh"> Đá banh</label>
+                    <input type="checkbox" id="caulong" name="caulong" value="caulong">
+                    <label for="caulong"> Cầu lông</label>
+                    <input type="checkbox" id="xemphim" name="xemphim" value="xemphim">
+                    <label for="xemphim"> Xem phim</label>
+                </fieldset>
+            </fieldset>
+        </div>
+    </form>
+</div>
+
+

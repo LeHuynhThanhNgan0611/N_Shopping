@@ -1,0 +1,51 @@
+﻿@model DemoWeb2.Models.Customer
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout1.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Customer</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NameCus)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NameCus)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PhoneCus)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PhoneCus)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EmailCus)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EmailCus)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PassCus)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PassCus)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.IDCus }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

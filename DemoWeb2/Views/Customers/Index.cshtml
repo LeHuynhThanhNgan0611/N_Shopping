@@ -1,0 +1,52 @@
+﻿@model IEnumerable<DemoWeb2.Models.Customer>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout1.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.NameCus)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PhoneCus)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EmailCus)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PassCus)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.NameCus)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PhoneCus)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EmailCus)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PassCus)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.IDCus }) |
+            @Html.ActionLink("Details", "Details", new { id=item.IDCus }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.IDCus })
+        </td>
+    </tr>
+}
+
+</table>

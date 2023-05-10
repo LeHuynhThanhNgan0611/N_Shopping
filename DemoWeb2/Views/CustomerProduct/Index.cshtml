@@ -24,22 +24,21 @@
                 </button>
                 <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                     <div class="navbar-nav mr-auto py-0">
-                        <a class="nav-link" href="~/CustomerProduct">Trang chủ</a>
-                        <a class="nav-link" href="~/Admin/Login">Quản lý</a>
-                        <a class="nav-link" href="~/CustomerProduct/Shop">Mua sắm</a>
-                        <a class="nav-link" href="~/CustomerProduct/Contact">Liên hệ</a>
-                    </div>
+            <a class="nav-link" href="~/CustomerProduct">Trang chủ</a>
+            <a class="nav-link" href="~/Admin/Login">Quản lý</a>
+            <a class="nav-link" href="~/CustomerProduct/Shop">Mua sắm</a>
+            <a class="nav-link" href="~/CustomerProduct/Contact">Liên hệ</a>
+        </div>
                     <div class="navbar-nav ml-auto py-0">
-                        @if (Session["TaiKhoan"] != null)
+                        @if (Session["TaiKhoan"] != null && Session["TaiKhoan"] is DemoWeb2.Models.Customer customer)
                         {
-                            var taiKhoan = (DemoWeb2.Models.Customer)Session["TaiKhoan"];
-                            <p class="nav-item nav-link">Hello @taiKhoan.NameCus</p>
-                            <a href="@Url.Action("Logout", "Users")" class="nav-item nav-link">Đăng xuất</a>
+                            <p class="nav-item nav-link">Hello @customer.NameCus</p>
+                            <a href="~/Users/Logout" class="nav-item nav-link">Đăng xuất</a>
                         }
                         else
                         {
-                            <a href="~/Users/Login" class="nav-item nav-link">Đăng nhập</a>
-                            <a href="~/Users/Register" class="nav-item nav-link">Đăng ký</a>
+                        <a href="~/Users/Login" class="nav-item nav-link">Đăng nhập</a>
+                        <a href="~/Users/Register" class="nav-item nav-link">Đăng ký</a>
                         }
                     </div>
 
@@ -172,4 +171,3 @@
     </div>
     <!-- Products End -->
 </div>
-

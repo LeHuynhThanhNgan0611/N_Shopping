@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Net;
 using PagedList;
+using Facebook;
 
 
 namespace DemoWeb2.Controllers
@@ -94,5 +95,25 @@ namespace DemoWeb2.Controllers
             lstProduct = lstProduct.OrderByDescending(n => n.ProductID).ToList();
             return View(lstProduct.ToPagedList(pageNumber, pageSize));
         }
+
+        public ActionResult ShareOnFacebook()
+        {
+            // Tạo đường dẫn của trang cần chia sẻ
+            var url = "http://localhost:59750/CustomerProduct/Details/";
+
+            // Khởi tạo đối tượng FacebookClient với Access Token của ứng dụng
+            var fb = new FacebookClient("{access-token}");
+
+            // Tạo đối tượng parameters để truyền vào phương thức FacebookClient.Post()
+            var parameters = new Dictionary<string, object>();
+            parameters["link"] = url;
+
+            // Thực hiện chia sẻ nội dung lên Facebook
+            dynamic result = fb.Post("me/feed", parameters);
+
+            // Trả về view báo hiệu chia sẻ thành công
+            return View();
+        }
+
     }
 }

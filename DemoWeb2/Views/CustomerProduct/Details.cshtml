@@ -16,7 +16,7 @@
         <div class="col-lg-9">
             <nav class="navbar navbar-expand-lg bg-light navbar-light py-3 py-lg-0 px-0">
                 <a href="" class="text-decoration-none d-block d-lg-none">
-                    <h1 class="m-0 display-5 font-weight-semi-bold"><span class="text-primary font-weight-bold border px-3 mr-1">E</span>Shopper</h1>
+                    <h1 class="m-0 display-5 font-weight-semi-bold"><span class=" font-weight-bold border px-3 mr-1" style="color:#00FFFF;">N</span>Shopping</h1>
                 </a>
                 <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
                     <span class="navbar-toggler-icon"></span>
@@ -29,9 +29,18 @@
                         <a class="nav-link" href="~/CustomerProduct/Contact">Liên hệ</a>
                     </div>
                     <div class="navbar-nav ml-auto py-0">
-                        <a href="~/Users/Login" class="nav-item nav-link">Đăng nhập</a>
-                        <a href="~/Users/Register" class="nav-item nav-link">Đăng ký</a>
+                        @if (Session["TaiKhoan"] != null && Session["TaiKhoan"] is DemoWeb2.Models.Customer customer)
+                        {
+                            <p class="nav-item nav-link">Hello @customer.NameCus</p>
+                            <a href="~/Users/Logout" class="nav-item nav-link">Đăng xuất</a>
+                        }
+                        else
+                        {
+                            <a href="~/Users/Login" class="nav-item nav-link">Đăng nhập</a>
+                            <a href="~/Users/Register" class="nav-item nav-link">Đăng ký</a>
+                        }
                     </div>
+
                 </div>
             </nav>
             <!-- Page Header Start -->
@@ -85,7 +94,35 @@
             <div class="d-flex pt-2">
                 <p class="text-dark font-weight-medium mb-0 mr-2">Share on:</p>
                 <div class="d-inline-flex">
-                    <a class="text-dark px-2" href="https://www.facebook.com/lehuynhthanhngan3005">
+                    <div id="fb-root"></div>
+                    <script>
+                        window.fbAsyncInit = function () {
+                            FB.init({
+                                appId: '758104562691593',
+                                xfbml: true,
+                                version: 'v12.0'
+                            });
+                        };
+
+                        (function (d, s, id) {
+                            var js, fjs = d.getElementsByTagName(s)[0];
+                            if (d.getElementById(id)) { return; }
+                            js = d.createElement(s); js.id = id;
+                            js.src = "https://connect.facebook.net/en_US/sdk.js";
+                            fjs.parentNode.insertBefore(js, fjs);
+                        }(document, 'script', 'facebook-jssdk'));
+
+                        function shareOnFacebook() {
+                            FB.ui({
+                                method: 'share',
+                                href: 'http://localhost:59750/CustomerProduct/Details',
+                            }, function (response) {
+                                console.log(response);
+                            });
+                        }
+
+                    </script>
+                    <a class="text-dark px-2" onclick="shareOnFacebook()" >
                         <i class="fab fa-facebook-f"></i>
                     </a>
                     <a class="text-dark px-2" href="https://www.instagram.com/nganle_300590/">
@@ -192,7 +229,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="name">Your Name *</label>
-                                    <input type="text" class="form-control" id="name"> 
+                                    <input type="text" class="form-control" id="name">
                                 </div>
                                 <div class="form-group">
                                     <label for="email">Your Email *</label>

@@ -1,28 +1,22 @@
 ﻿@{
     ViewBag.Title = "Register";
     Layout = "~/Views/Shared/_LayoutDetail.cshtml";
+
 }
-<div class="signup-box" style="height: 450px">
-    <h1>Đăng ký</h1>
+<link href="~/Content/css/login.css" rel="stylesheet" />
+<div class="signup-box" style="height: 550px; width:400px">
     @using (Html.BeginForm("Register", "Users"))
     {
         @Html.ValidationSummary(true)
-<form>
-    <label for="name" class="form-label">Tên tài khoản:</label>
-    <input type="text" class="form-control" id="name" name="NameCus" required>
-    <label for="email" class="form-label">Email:</label>
-    <input type="email" class="form-control" id="email" name="EmailCus" required>
-    <label for="pwd" class="form-label">Mật khẩu:</label>
-    <input type="password" class="form-control" id="pwd" name="PassCus" required>
-    <label for="phone" class="form-label">Điện thoại:</label>
-    <input type="text" class="form-control" id="phone" name="PhoneCus" required>
-    <button type="submit" class="btn btn-primary" style="width: 320px; height: 35px; margin-top: 20px; border: none; background-color: #49c1a2; color: white; font-size: 18px;">
-        Đăng ký
-    </button>
-    <closeform></closeform>
-</form>
+        <form class="form" id="a-form" action="">
+            <h2 class=" form_title title ">ĐĂNG KÝ</h2>
+            <input class="form__input" type="text" placeholder="Số điện thoại" name="PhoneCus" required>
+            <input class="form__input" type="password" placeholder="Mật khẩu" name="PassCus" required>
+            <button class="form__button button submit">ĐĂNG KÝ</button>
+        </form>
     }
+    <p class="text-primary">
+        Bạn đã có tài khoản? <a href="~/Users/Login">Đăng nhập </a>
+    </p>
+
 </div>
-<p class="para-2">
-    Bạn đã có tài khoản? <a href="~/Users/Login">Đăng nhập </a>
-</p>

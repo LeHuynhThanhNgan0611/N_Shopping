@@ -32,8 +32,8 @@ namespace DemoWeb2.Controllers
                     ModelState.AddModelError(string.Empty, "Email không được để trống");
                 if (string.IsNullOrEmpty(cust.PhoneCus))
                     ModelState.AddModelError(string.Empty, "Điện thoại không được để trống");
-                    //Kiểm tra xem có người nào đã đăng kí với tên đăng nhập này hay chưa
-                   
+                //Kiểm tra xem có người nào đã đăng kí với tên đăng nhập này hay chưa
+
                 var khachhang = database.Customers.FirstOrDefault(k => k.NameCus == cust.NameCus);
                 if (khachhang != null)
                     ModelState.AddModelError(string.Empty, "Đã có người đăng kí tên này");

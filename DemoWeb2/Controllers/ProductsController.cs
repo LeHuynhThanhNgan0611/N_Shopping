@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using DemoWeb2.Models;
 using System.IO;
 using PagedList;
+using PagedList.Mvc;
 
 namespace DemoWeb2.Controllers
 {

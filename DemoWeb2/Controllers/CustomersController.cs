@@ -6,7 +6,9 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI;
 using DemoWeb2.Models;
+using PagedList;
 
 namespace DemoWeb2.Controllers
 {
@@ -15,9 +17,31 @@ namespace DemoWeb2.Controllers
         private DBSportStore1Entities db = new DBSportStore1Entities();
 
         // GET: Customers
-        public ActionResult Index()
+        public ActionResult Index(string currentFilter, string SearchString, int? page)
         {
-            return View(db.Customers.ToList());
+            //return view(db.customers.tolist());
+            var lstCus = new List<Customer>();
+            if (SearchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                SearchString = currentFilter;
+            }
+            if (!string.IsNullOrEmpty(SearchString))
+            {
+                lstCus = db.Customers.Where(n => n.NameCus.Contains(SearchString)).ToList();
+            }
+            else
+            {
+                lstCus = db.Customers.ToList();
+            }
+            ViewBag.CurrentProduct = SearchString;
+            int pageSize = 6;
+            int pageNumber = (page ?? 1);
+            lstCus = lstCus.OrderByDescending(n => n.IDCus).ToList();
+            return View(lstCus.ToPagedList(pageNumber, pageSize));
         }
 
         // GET: Customers/Details/5

@@ -92,16 +92,14 @@ namespace DemoWeb2.Controllers
                 .Select(od => od.Product)
                 .ToList();
 
-            // Truy vấn tất cả sản phẩm để sử dụng trong SelectList
-            ViewBag.Products = new SelectList(db.Products, "ID", "NamePro");
+            // Truy vấn tất cả khách hàng để sử dụng trong SelectList
+            ViewBag.IDCus = new SelectList(db.Customers, "IDCus", "NameCus", orderPro.IDCus);
 
             return View(orderPro);
         }
 
-
         // POST: OrderProes/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        // Để bảo vệ chống lại các cuộc tấn công overposting, hãy cho phép chỉ các thuộc tính cụ thể mà bạn muốn gắn kết vào, để biết thêm chi tiết hãy xem: https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ID,DateOrder,IDCus,AddressDeliverry")] OrderPro orderPro)
@@ -114,16 +112,19 @@ namespace DemoWeb2.Controllers
                 // Thêm lại danh sách sản phẩm mới
                 foreach (var product in orderPro.Products)
                 {
-                    db.OrderDetails.Add(new OrderDetail { ID = orderPro.ID, IDProduct = product.ProductID});
+                    db.OrderDetails.Add(new OrderDetail { ID = orderPro.ID, IDProduct = product.ProductID });
                 }
 
                 db.Entry(orderPro).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+
+            // Truy vấn tất cả khách hàng để sử dụng trong SelectList
             ViewBag.IDCus = new SelectList(db.Customers, "IDCus", "NameCus", orderPro.IDCus);
             return View(orderPro);
         }
+
 
         // GET: OrderProes/Delete/5
         public ActionResult Delete(int? id)

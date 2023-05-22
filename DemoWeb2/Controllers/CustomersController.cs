@@ -70,14 +70,30 @@ namespace DemoWeb2.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "IDCus,NameCus,PhoneCus,EmailCus,PassCus")] Customer customer)
+        public ActionResult Create([Bind(Include = "IDCus,NameCus,PhoneCus,EmailCus,PassCus")] Customer customer, OrderPro orderPro)
         {
             if (ModelState.IsValid)
             {
-                db.Customers.Add(customer);
+                // Xóa toàn bộ các sản phẩm trong đơn hàng
+                db.OrderDetails.RemoveRange(db.OrderDetails.Where(od => od.ID == orderPro.ID));
+
+                // Thêm lại danh sách sản phẩm mới (nếu có)
+                if (orderPro.Products != null)
+                {
+                    foreach (var product in orderPro.Products)
+                    {
+                        if (product != null)
+                        {
+                            db.OrderDetails.Add(new OrderDetail { ID = orderPro.ID, IDProduct = product.ProductID });
+                        }
+                    }
+                }
+
+                db.Entry(orderPro).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+
 
             return View(customer);
         }

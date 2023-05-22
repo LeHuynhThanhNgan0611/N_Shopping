@@ -2438,8 +2438,8 @@
     <Content Include="Views\OrderProes\Create.cshtml" />
     <Content Include="Views\OrderProes\Delete.cshtml" />
     <Content Include="Views\OrderProes\Details.cshtml" />
-    <Content Include="Views\OrderProes\Edit.cshtml" />
     <Content Include="Views\OrderProes\Index.cshtml" />
+    <Content Include="Views\OrderProes\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

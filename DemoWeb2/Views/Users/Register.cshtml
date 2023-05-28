@@ -8,12 +8,14 @@
     @using (Html.BeginForm("Register", "Users"))
     {
         @Html.ValidationSummary(true)
-        <form class="form" id="a-form" action="">
-            <h2 class=" form_title title ">ĐĂNG KÝ</h2>
-            <input class="form__input" type="text" placeholder="Số điện thoại" name="PhoneCus" required>
-            <input class="form__input" type="password" placeholder="Mật khẩu" name="PassCus" required>
-            <button class="form__button button submit">ĐĂNG KÝ</button>
-        </form>
+    <form class="form" id="a-form" action="">
+        <h2 class=" form_title title ">ĐĂNG KÝ</h2>
+        <input class="form__input" type="text" placeholder="Tên" name="NameCus" required />
+        <input class="form__input" style="margin-top: 20px" type="email" placeholder="Email" name="EmailCus" required />
+        <input class="form__input" style="margin-top: 20px" type="text" placeholder="Số điện thoại" name="PhoneCus" required>
+        <input class="form__input" style="margin-top: 20px" type="password" placeholder="Mật khẩu" name="PassCus" required>
+        <button class="form__button button submit" style="margin-left: 85px">ĐĂNG KÝ</button>
+    </form>
     }
     <p class="text-primary">
         Bạn đã có tài khoản? <a href="~/Users/Login">Đăng nhập </a>

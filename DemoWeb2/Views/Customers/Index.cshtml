@@ -9,21 +9,13 @@
 }
 <div style="margin: 10px auto; width: 90%;">
     <h2 style="text-align: center">THÔNG TIN CUSTOMER</h2>
-
-    @*<p>
-            @Html.ActionLink("TẠO MỚI", "Create", null, new
-                {
-                    @class = "btn btn-primary"
-                })
-        </p>*@
     @using (Html.BeginForm("Index", "Customers", FormMethod.Get))
     {
         <div class="row">
             <div class="col-md-8 offset-md-2">
                 <form action="simple-results.html">
                     <div class="input-group input-group-lg">
-                        @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-control ", placeholder = "Type your keywords here", value = "Lorem ipsum" })
-                        @*<input type="search" class="form-control form-control-lg" placeholder="Type your keywords here" value="Lorem ipsum">*@
+                        @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-control ", placeholder = "Nhập tên khách hàng", value = "Lorem ipsum" })
                         <div class="input-group-append">
                             <button type="submit" class="btn btn-default">
                                 <i class="fa fa-search"></i>

@@ -30,7 +30,7 @@
             <div class="form-group">
                 MÔ TẢ
                 <div class="col-md-10">
-                    @Html.TextAreaFor(model => model.DecriptionPro, new { @class = "form-control" })
+                    <textarea id="editDec" name="DecriptionPro" class="form-control"></textarea>
                     @Html.ValidationMessageFor(model => model.DecriptionPro, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -73,4 +73,9 @@
         @Html.ActionLink("Back to List", "Index")
     </div>
 </div>
+@section scripts{
+    <script>
+        CKEDITOR.replace('editDec')
+    </script>
+}
 

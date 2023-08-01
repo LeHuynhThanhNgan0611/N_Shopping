@@ -31,9 +31,9 @@
                         <a class="nav-link" href="~/CustomerProduct/Contact">Liên hệ</a>
                     </div>
                     <div class="navbar-nav ml-auto py-0">
-                        @if (Session["TaiKhoan"] != null && Session["TaiKhoan"] is DemoWeb2.Models.Customer customer)
+                        @if (Session["TaiKhoan"] != null && Session["TaiKhoan"] is DemoWeb2.Models.Customer loggedInCustomer)
                         {
-                            <p class="nav-item nav-link">Hello @customer.NameCus</p>
+                            <p class="nav-item nav-link">Hello @loggedInCustomer.NameCus</p>
                             <a href="~/Users/Logout" class="nav-item nav-link">Đăng xuất</a>
                         }
                         else

@@ -12,6 +12,13 @@ CKFinder.customConfig = function( config )
 	config.uiColor = '#BDE31E';
 
     config.language = 'vi';
-    config.removePlugins = 'help';
+	config.removePlugins = 'help';
+
+    config.filebrowserBrowseUrl = "/ckfinder/ckfinder.html";
+    config.filebrowserImageBrowseUrl = "/ckfinder/ckfinder.html?type=Images";
+    config.filebrowserFlashBrowseUrl = "/ckfinder/ckfinder.html?type=Flash";
+    config.filebrowserUploadUrl = "/ckfinder/core/connector/aspx/connector.aspx?command=QuickUpload&type=Files";
+    config.filebrowserImageUploadUrl = "/ckfinder/core/connector/aspx/connector.aspx?command=QuickUpload&type=Images";
+    config.filebrowserFlashUploadUrl = "/ckfinder/core/connector/aspx/connector.aspx?command=QuickUpload&type=Flash";
 
 };

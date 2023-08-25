@@ -14,9 +14,9 @@ namespace DemoWeb2
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
-                name: "Default",
+                name: "N_Shopping",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "CustomerProduct", action = "Index", id = UrlParameter.Optional }
             );
         }
     }

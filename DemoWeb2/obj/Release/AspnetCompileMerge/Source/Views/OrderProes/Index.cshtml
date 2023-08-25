@@ -1,0 +1,64 @@
+﻿@model IEnumerable<DemoWeb2.Models.OrderPro>
+
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout1.cshtml";
+}
+<div style="margin: 10px auto; width: 90%;">
+    <h2 style="text-align: center">THÔNG TIN ORDERS</h2>
+    <p>
+        @Html.ActionLink("TẠO MỚI", "Create", null, new
+        {
+            @class = "btn btn-primary"
+        })
+    </p>
+
+    <table class="table" style="margin-top: 20px">
+        <tr>
+            <th>
+                NGÀY ĐẶT
+            </th>
+            <th>
+                ĐỊA CHỈ GIAO HÀNG
+            </th>
+            <th>
+                TÀI KHOẢN
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateOrder)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AddressDeliverry)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Customer.NameCus)
+                </td>
+                <td>
+                    @Html.ActionLink("Sửa", "Edit", new
+                   {
+                       id =
+                  item.ID
+                   }, new { @class = "btn btn-success" })
+                    @Html.ActionLink("Chi tiết", "Details", new
+                    {
+                        id =
+                   item.ID
+                    }, new { @class = "btn btn-primary" })
+                    @Html.ActionLink("Xóa", "Delete", new
+                    {
+                        id =
+                   item.ID
+                    }, new { @class = "btn btn-danger" })
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>

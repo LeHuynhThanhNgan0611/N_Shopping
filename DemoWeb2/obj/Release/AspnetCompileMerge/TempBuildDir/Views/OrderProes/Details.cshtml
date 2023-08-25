@@ -1,0 +1,57 @@
+﻿@model DemoWeb2.Models.OrderPro
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout1.cshtml";
+}
+<div style="margin: 10px auto; width: 70%;">
+    <h2 class="text-center">CHI TIẾT ORDER</h2>
+
+    <div>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                NGÀY ĐẶT HÀNG
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.DateOrder)
+            </dd>
+
+            <dt>
+                ĐỊA CHỈ GIAO HÀNG
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.AddressDeliverry)
+            </dd>
+
+            <dt>
+                KHÁCH HÀNG
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Customer.NameCus)
+            </dd>
+        </dl>
+    </div>
+
+    <h4 class="text-center">Danh sách sản phẩm</h4>
+    <table class="table">
+        <tr>
+            <th>Name</th>
+            <th>Price</th>
+            <!-- Các cột khác tùy thuộc vào thuộc tính của sản phẩm -->
+        </tr>
+        @foreach (var product in Model.Products)
+        {
+            <tr>
+                <td>@product.NamePro</td>
+                <td>@product.Price</td>
+                <!-- Các cột khác tùy thuộc vào thuộc tính của sản phẩm -->
+            </tr>
+        }
+    </table>
+
+    <p>
+        @Html.ActionLink("SỬA", "Edit", new { id = Model.ID }, new { @class = "btn btn-success" }) 
+        @Html.ActionLink("TRỞ LẠI", "Index")
+    </p>
+</div>

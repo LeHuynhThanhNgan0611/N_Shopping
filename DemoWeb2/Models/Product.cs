@@ -11,8 +11,7 @@ namespace DemoWeb2.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Product
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -25,8 +24,6 @@ namespace DemoWeb2.Models
         public string NamePro { get; set; }
         public string DecriptionPro { get; set; }
         public string Category { get; set; }
-
-        [Range(1000, 1000000, ErrorMessage = "Giá s?n ph?m ph?i n?m trong kho?ng t? 1000 ??n 1000000")]
         public Nullable<decimal> Price { get; set; }
         public string ImagePro { get; set; }
     

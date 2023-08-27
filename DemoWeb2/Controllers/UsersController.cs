@@ -13,6 +13,10 @@ using RestSharp;
 using System.Net;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
+using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using System.Threading.Tasks;
 
 namespace DemoWeb2.Controllers
 {
@@ -88,38 +92,47 @@ namespace DemoWeb2.Controllers
             }
             return View();
         }
+        [AllowAnonymous]
+        public ActionResult GoogleLogin()
+        {
+            var cancellationToken = CancellationToken.None; // Tạo CancellationToken
+
+            var result = new AuthorizationCodeMvcApp(this, new AppFlowMetadata())
+                .AuthorizeAsync(cancellationToken) // Truyền CancellationToken vào đây
+                .Result;
+
+            if (result.Credential != null)
+            {
+                var service = new PlusService(new BaseClientService.Initializer
+                {
+                    HttpClientInitializer = result.Credential,
+                    ApplicationName = "TestApp"
+                });
+
+                var me = service.People.Get("me").Execute();
+
+                // Đăng ký người dùng nếu chưa đăng ký
+                // Đặt phiên của người dùng, đăng nhập họ và chuyển hướng
+                Session["user"] = me.Id;
+                return RedirectToAction("Index", "CustomerProduct");
+            }
+            else
+            {
+                // Đăng nhập thất bại hoặc bị hủy
+                return RedirectToAction("Login", "Users");
+            }
+        }
+
         //[AllowAnonymous]
-        //public ActionResult GoogleLogin()
+        //public IActionResult ExternalLogin(string provider, string returnUrl = null)
         //{
-        //    var cancellationToken = CancellationToken.None; // Tạo CancellationToken
-
-        //    var result = new AuthorizationCodeMvcApp(this, new AppFlowMetadata())
-        //        .AuthorizeAsync(cancellationToken) // Truyền CancellationToken vào đây
-        //        .Result;
-
-        //    if (result.Credential != null)
-        //    {
-        //        var service = new PlusService(new BaseClientService.Initializer
-        //        {
-        //            HttpClientInitializer = result.Credential,
-        //            ApplicationName = "TestApp"
-        //        });
-
-        //        var me = service.People.Get("me").Execute();
-
-        //        // Đăng ký người dùng nếu chưa đăng ký
-        //        // Đặt phiên của người dùng, đăng nhập họ và chuyển hướng
-        //        Session["user"] = me.Id;
-        //        return RedirectToAction("Index", "Home");
-        //    }
-        //    else
-        //    {
-        //        // Đăng nhập thất bại hoặc bị hủy
-        //        return RedirectToAction("Login", "Account");
-        //    }
+        //    // Request a redirect to the external login provider.
+        //    var redirectUrl = Url.Action("ExternalLoginCallback", "Account", new { ReturnUrl = returnUrl });
+        //    var properties = _signInManager.ConfigureExternalAuthenticationProperties(provider, redirectUrl);
+        //    return Challenge(properties, provider);
         //}
 
-        public ActionResult GoogleLoginCallback(string code)
+        public async Task<ActionResult> GoogleLoginCallback (string code)
         {
             if (code != null)
             {
@@ -147,6 +160,28 @@ namespace DemoWeb2.Controllers
                 var content2 = response2.Content;
 
                 var user = (JObject)JsonConvert.DeserializeObject(content2);
+
+                var customer = new Customer
+                {
+                    GoogleId = user["id"].ToString(),
+                    NameCus = user["name"].ToString(),
+                    // ... (Các thông tin khác mà bạn muốn lưu)
+                };
+                // Lưu thông tin người dùng vào cơ sở dữ liệu (ví dụ: Entity Framework)
+                database.Customers.Add(customer);
+                database.SaveChanges();
+
+                var claims = new List<Claim>
+                {
+                    new Claim(ClaimTypes.NameIdentifier, user["id"].ToString()),
+                    new Claim(ClaimTypes.Name, user["name"].ToString()),
+                    // ... (Thêm các thông tin khác)
+                };
+
+                var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                var principal = new ClaimsPrincipal(identity);
+
+                Session["user"] = customer;
                 return RedirectToAction("Index", "CustomerProduct");
 
             }

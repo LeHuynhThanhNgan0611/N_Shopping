@@ -6,6 +6,7 @@ using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Owin;
 using System.Configuration;
+using System.Web.Mvc;
 
 namespace DemoWeb2
 {
@@ -26,8 +27,12 @@ namespace DemoWeb2
             {
                 ClientId = ConfigurationManager.AppSettings["GoogleClientId"],
                 ClientSecret = ConfigurationManager.AppSettings["GoogleClientSecret"],
-                CallbackPath = new PathString("https://localhost:59750/Login/GoogleLoginCallback")
+                CallbackPath = new PathString("/Login/GoogleLoginCallback")
+
             });
+
+            // Đảm bảo tất cả yêu cầu cần phải xác thực
+            GlobalFilters.Filters.Add(new AuthorizeAttribute());
         }
     }
 }

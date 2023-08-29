@@ -192,3 +192,7 @@ D:\ĐỒ ÁN PHẦM MỀM\DemoWeb2\DemoWeb2\obj\Release\DemoWeb2.csproj.CoreComp
 D:\ĐỒ ÁN PHẦM MỀM\DemoWeb2\DemoWeb2\obj\Release\DemoWeb2.csproj.CopyComplete
 D:\ĐỒ ÁN PHẦM MỀM\DemoWeb2\DemoWeb2\obj\Release\DemoWeb2.dll
 D:\ĐỒ ÁN PHẦM MỀM\DemoWeb2\DemoWeb2\obj\Release\DemoWeb2.pdb
+D:\ĐỒ ÁN PHẦM MỀM\DemoWeb2\DemoWeb2\bin\Microsoft.AspNetCore.Mvc.Abstractions.dll
+D:\ĐỒ ÁN PHẦM MỀM\DemoWeb2\DemoWeb2\bin\Microsoft.AspNetCore.Routing.Abstractions.dll
+D:\ĐỒ ÁN PHẦM MỀM\DemoWeb2\DemoWeb2\bin\Microsoft.AspNetCore.Mvc.Abstractions.xml
+D:\ĐỒ ÁN PHẦM MỀM\DemoWeb2\DemoWeb2\bin\Microsoft.AspNetCore.Routing.Abstractions.xml

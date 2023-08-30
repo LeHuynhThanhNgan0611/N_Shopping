@@ -281,3 +281,7 @@ D:\ĐỒ ÁN PHẦM MỀM\DemoWeb2\DemoWeb2\bin\RestSharp.xml
 D:\ĐỒ ÁN PHẦM MỀM\DemoWeb2\DemoWeb2\bin\System.Text.Json.xml
 D:\ĐỒ ÁN PHẦM MỀM\DemoWeb2\DemoWeb2\bin\System.Threading.Tasks.Extensions.xml
 D:\ĐỒ ÁN PHẦM MỀM\DemoWeb2\DemoWeb2\bin\System.ValueTuple.xml
+D:\ĐỒ ÁN PHẦM MỀM\DemoWeb2\DemoWeb2\bin\Microsoft.AspNetCore.Mvc.Abstractions.dll
+D:\ĐỒ ÁN PHẦM MỀM\DemoWeb2\DemoWeb2\bin\Microsoft.AspNetCore.Routing.Abstractions.dll
+D:\ĐỒ ÁN PHẦM MỀM\DemoWeb2\DemoWeb2\bin\Microsoft.AspNetCore.Mvc.Abstractions.xml
+D:\ĐỒ ÁN PHẦM MỀM\DemoWeb2\DemoWeb2\bin\Microsoft.AspNetCore.Routing.Abstractions.xml

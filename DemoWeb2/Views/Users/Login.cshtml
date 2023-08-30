@@ -1,21 +1,35 @@
-﻿@{
+﻿﻿@{
     ViewBag.Title = "Login";
     Layout = "~/Views/Shared/_LayoutDetail.cshtml";
 }
-<link href="~/Content/css/login.css" rel="stylesheet" />
-<div class="login-box" style="height: 450px; width:400px">
-    <h2 style="color: red;">@ViewBag.ThongBao</h2>
+<link href="~/Content/css/formlogin.css" rel="stylesheet" />
+<div class="wrapper">
+    <h1>Đăng nhập</h1>
     @using (Html.BeginForm("Login", "Users"))
     {
         @Html.ValidationSummary(true)
-        <form class="form" id="b-form" action="">
-            <h2 class="form_title title">ĐĂNG NHẬP</h2>
-            <input class="form__input" style="margin-top: 20px" type="text" placeholder="Name" name="NameCus" required>
-            <input class="form__input" style="margin-top: 20px" type="password" placeholder="Password" name="PassCus" required>
-            <button class="form__button button submit" style="margin-left: 85px">ĐĂNG NHẬP</button>
-        </form>
+        <div class="input-box">
+            <input type="text" placeholder="Tên đăng nhập" name="NameCus" required>
+            <i class="fa-solid fa-user"></i>
+        </div>
+        <div class="input-box">
+            <input type="password" placeholder="Mật khẩu" name="PassCus" required>
+            <i class="fa-solid fa-lock"></i>
+        </div>
+        <div class="remember-forgot">
+            <label>
+                <input type="checkbox">
+            </label>
+            <a href="#">Quên mật khẩu?</a>
+        </div>
+        <button type="submit" class="btn">
+            Đăng nhập
+        </button>
+        <div class="register-link">
+            <p>
+                Bạn chưa có tài khoản?
+                <a href="@Url.Action("Register", "Users")">Đăng ký</a>
+            </p>
+        </div>
     }
-    <p class="text-primary">
-        Bạn chưa có tài khoản? <a href="~/Users/Register">Đăng ký </a>
-    </p>
 </div>

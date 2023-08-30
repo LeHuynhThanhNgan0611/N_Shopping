@@ -1,0 +1,78 @@
+﻿@*@model IEnumerable<DemoWeb2.Models.Customer>*@
+@using PagedList;
+@using PagedList.Mvc;
+@model PagedList.IPagedList<DemoWeb2.Models.Customer>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout1.cshtml";
+}
+<div style="margin: 10px auto; width: 90%;">
+    <h2 style="text-align: center">THÔNG TIN CUSTOMER</h2>
+    @using (Html.BeginForm("Index", "Customers", FormMethod.Get))
+    {
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <form action="simple-results.html">
+                    <div class="input-group input-group-lg">
+                        @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-control ", placeholder = "Nhập tên khách hàng", value = "Lorem ipsum" })
+                        <div class="input-group-append">
+                            <button type="submit" class="btn btn-default">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    }
+    <table class="table" style="margin-top: 20px">
+        <tr>
+            <th>
+                TÊN TÀI KHOẢN
+            </th>
+            <th>
+                SỐ ĐIỆN THOẠI
+            </th>
+            <th>
+                EMAIL
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NameCus)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PhoneCus)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EmailCus)
+                </td>
+                <td>
+                    @Html.ActionLink("Sửa", "Edit", new
+                        {
+                            id =
+                       item.IDCus
+                        }, new { @class = "btn btn-success" })
+                    @Html.ActionLink("Chi tiết", "Details", new
+                    {
+                        id =
+                   item.IDCus
+                    }, new { @class = "btn btn-primary" })
+                    @Html.ActionLink("Xóa", "Delete", new
+                    {
+                        id =
+                   item.IDCus
+                    }, new { @class = "btn btn-danger" })
+                </td>
+            </tr>
+        }
+
+    </table>
+    Trang @(Model.PageCount<Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page, currentFilter = ViewBag.CurrentFilter }))
+</div>

@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="DBSportStore1Entities-Web.config Connection String" description="DBSportStore1Entities Connection String used in web.config by the application to access the database." defaultValue="metadata=res://*/Models.Model1.csdl|res://*/Models.Model1.ssdl|res://*/Models.Model1.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=DESKTOP-07FU3PM\SQLEXPRESS;initial catalog=DBSportStore1;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework&quot;" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="D:\\ĐỒ\ ÁN\ PHẦM\ MỀM\\DemoWeb2\\DemoWeb2\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='DBSportStore1Entities']/@connectionString" />
+  </parameter>
+</parameters>

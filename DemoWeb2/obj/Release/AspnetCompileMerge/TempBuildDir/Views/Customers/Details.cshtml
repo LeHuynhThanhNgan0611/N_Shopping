@@ -1,0 +1,54 @@
+﻿@model DemoWeb2.Models.Customer
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout1.cshtml";
+}
+
+<div style="margin: 10px auto; width: 70%;">
+    <h2 class="text-center">CHI TIẾT KHÁCH HÀNG</h2>
+    <div>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.NameCus)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.NameCus)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.PhoneCus)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.PhoneCus)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.EmailCus)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.EmailCus)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.PassCus)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.PassCus)
+            </dd>
+
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("SỬA", "Edit", new { id = Model.IDCus }, new
+        {
+       @class = "btn btn-success"
+        }) 
+        @Html.ActionLink("TRỞ LẠI", "Index")
+    </p>
+</div>

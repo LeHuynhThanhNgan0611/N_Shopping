@@ -1,0 +1,58 @@
+﻿@model DemoWeb2.Models.Category
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout1.cshtml";
+}
+<div style="margin: 10px auto; width: 70%;">
+    <h2 style="text-align: center">TẠO MỚI CATEGORY</h2>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-horizontal">
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                MÃ CATEGORY
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.IDCate, new
+                    {
+                        htmlAttributes = new
+                        {
+                   @class = "form-control"
+                        }
+                    })
+                    @Html.ValidationMessageFor(model => model.IDCate, "", new
+                    {
+                        @class =
+                   "text-danger"
+                    })
+                </div>
+            </div>
+            <div class="form-group">
+                TÊN CATEGORY
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.NameCate, new
+                    {
+                        htmlAttributes = new
+                   { @class = "form-control" }
+                    })
+                    @Html.ValidationMessageFor(model => model.NameCate, "", new
+                    {
+                        @class
+                   = "text-danger"
+                    })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10 mb-3 mt-3">
+                    <input type="submit" value="TẠO MỚI" class="btn btn-primary" />
+                </div>
+            </div>
+        </div>
+    }
+    <div>
+        @Html.ActionLink("TRỞ LẠI", "Index")
+    </div>
+</div>
+

@@ -2154,7 +2154,9 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Images\AnyConv.com__túi missout.jpg" />
+    <Content Include="Images\ao_thun2.jpg" />
     <Content Include="Images\Giohang.gif" />
+    <Content Include="Images\thuong_hieu_ao_unisex_local_brand_nhieu_nguoi_mua_74e5183a23.jpg" />
     <Content Include="Images\áp thun.jpg" />
     <Content Include="Models\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -2373,6 +2375,7 @@
     <Content Include="Content\scss\bootstrap\scss\_utilities.scss" />
     <Content Include="Content\scss\bootstrap\scss\_variables.scss" />
     <Content Include="Content\scss\style.scss" />
+    <Content Include="Images\ao_thun2.webp" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

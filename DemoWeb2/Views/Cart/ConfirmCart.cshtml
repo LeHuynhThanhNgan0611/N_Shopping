@@ -5,87 +5,113 @@
     Layout = "~/Views/Shared/_MasterLayout.cshtml";
     Customer customer = Session["TaiKhoan"] as Customer;
 }
-<h2 style="text-align:center">CART INFO</h2>
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th>MÃ SẢN PHẨM</th>
-                <th>TÊN SẢN PHẨM</th>
-                <th>ẢNH</th>
-                <th>SỐ LƯỢNG</th>
-                <th>ĐƠN GIÁ</th>
-                <th>THÀNH TIỀN</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var product in Model)
-            {
-                <tr>
-                    <td>@product.ProductID</td>
-                    <td>@product.NamePro</td>
-                    <td><img src="~/Images/@product.ImagePro" style="width:100%" /></td>
-                    <td>@product.Number</td>
-                    <td>@String.Format("{0:#,##0}", product.Price) VNĐ</td>
-                    <td>@String.Format("{0:#,##0}", product.FinalPrice()) VNĐ</td>
-                </tr>
-            }
-            <tr style="font-weight:bold; text-align:right; color:red;">
-                <td colspan="4">Tổng số lượng: @ViewBag.TotalNumber</td>
-                <td colspan="5">Tổng tiền: @ViewBag.TotalPrice VNĐ</td>
-            </tr>
-        </tbody>
-    </table>
-    <h2 style="text-align:center">CUSTOMER INFO</h2>
-    <table class="table table-bordered">
-        <tr>
-            <td>Tên: </td>
-            <td>@customer.NameCus</td>
-        </tr>
-        <tr>
-            <td>Số điện thoại: </td>
-            <td>@customer.PhoneCus</td>
-        </tr>
-        <tr>
-            <td>Ngày đặt: </td>
-            <td>@DateTime.Now.ToShortDateString()</td>
-        </tr>
-        <tr>
-            <td colspan="2" style="text-align: center;">
-                @Html.ActionLink("Đặt hàng", "AgreeCart", null, new { @class = "btn btn-primary" })
-            </td>
-        </tr>
-    </table>
-
-@*
-        <!--@using (Html.BeginForm("AgreeCart", "Cart", FormMethod.Post))
-    {
-        @Html.AntiForgeryToken()
-
-        <h2 style="text-align:center">DELIVERY INFO</h2>
-        <div class="form-group">
-            @Html.LabelFor(model => model.AddressDeliverry, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.TextBoxFor(model => model.AddressDeliverry, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.AddressDeliverry, "", new { @class = "text-danger" })
-            </div>
+<!-- Navbar Start -->
+<div class="container-fluid mb-5">
+    <div class="row border-top px-xl-5">
+        <div class="col-lg-3 d-none d-lg-block">
+            <a class="btn shadow-none d-flex align-items-center justify-content-between text-white w-100" data-toggle="collapse" href="#navbar-vertical" style="height: 65px; margin-top: -1px; padding: 0 30px; background-color: #33CCFF; ">
+                <h6 class="m-0">Danh mục sản phẩm</h6>
+                <i class="fa fa-angle-down text-dark"></i>
+            </a>
+            @Html.Action("GetProductsByCategory", "CustomerProduct")
         </div>
+        <div class="col-lg-9">
+            <nav class="navbar navbar-expand-lg bg-light navbar-light py-3 py-lg-0 px-0">
+                <a href="" class="text-decoration-none d-block d-lg-none">
+                    <h1 class="m-0 display-5 font-weight-semi-bold"><span class=" font-weight-bold border px-3 mr-1" style="color:#00FFFF;">N</span>Shopping</h1>
+                </a>
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                    <div class="navbar-nav mr-auto py-0">
+                        <a class="nav-link" href="~/CustomerProduct">Trang chủ</a>
+                        <a class="nav-link" href="~/Admin/Login">Quản lý</a>
+                        <a class="nav-link" href="~/CustomerProduct/Shop">Mua sắm</a>
+                        <a class="nav-link" href="~/CustomerProduct/Contact">Liên hệ</a>
+                    </div>
+                    <div class="navbar-nav ml-auto py-0">
+                        @if (Session["TaiKhoan"] != null && Session["TaiKhoan"] is DemoWeb2.Models.Customer customer)
+                        {
+                            <p class="nav-item nav-link">Hello @customer.NameCus</p>
+                            <a href="~/Users/Logout" class="nav-item nav-link">Đăng xuất</a>
+                        }
+                        else
+                        {
+                            <a href="~/Users/Login" class="nav-item nav-link">Đăng nhập</a>
+                            <a href="~/Users/Register" class="nav-item nav-link">Đăng ký</a>
+                        }
+                    </div>
 
-        <h2 style="text-align:center">CART INFO</h2>
-        <table class="table table-bordered">-->-->
-             @*code cũ*@
-<!--</table>
-
-<h2 style="text-align:center">CUSTOMER INFO</h2>
-<table class="table table-bordered">-->
-@*code cũ*@
-<!--</table>
-
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Đặt hàng" class="btn btn-primary" />
+                </div>
+            </nav>
+            <!-- Page Header Start -->
+            <div class="container-fluid bg-secondary mb-5">
+                <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 300px">
+                    <h1 class="font-weight-semi-bold text-uppercase mb-3">Thông tin giỏ hàng</h1>
+                    <div class="d-inline-flex">
+                        <p class="m-0"><a href="~/CustomerProduct" style="color: #33CCFF;">Trang chủ</a></p>
+                        <p class="m-0 px-2">-</p>
+                        <p class="m-0">Chi tiết đơn hàng</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Page Header End -->
         </div>
     </div>
-}-->
-*@
+</div>
+<!--Navbar End -->
 
+    <h2 style="text-align:center">CART INFO</h2>
+    <div style="margin: 10px auto; width: 90%;">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>MÃ SẢN PHẨM</th>
+                    <th>TÊN SẢN PHẨM</th>
+                    <th>ẢNH</th>
+                    <th>SỐ LƯỢNG</th>
+                    <th>ĐƠN GIÁ</th>
+                    <th>THÀNH TIỀN</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var product in Model)
+                {
+                    <tr>
+                        <td class="align-middle text-center">@product.ProductID</td>
+                        <td class="align-middle text-center">@product.NamePro</td>
+                        <td class="align-middle text-center"><img src="~/Images/@product.ImagePro" style="width:50%" /></td>
+                        <td class="align-middle text-center">@product.Number</td>
+                        <td class="align-middle text-center">@String.Format("{0:#,##0}", product.Price) VNĐ</td>
+                        <td class="align-middle text-center">@String.Format("{0:#,##0}", product.FinalPrice()) VNĐ</td>
+                    </tr>
+                }
+                <tr style="font-weight:bold; text-align:right; color:red;">
+                    <td colspan="4">Tổng số lượng: @ViewBag.TotalNumber</td>
+                    <td colspan="5">Tổng tiền: @ViewBag.TotalPrice VNĐ</td>
+                </tr>
+            </tbody>
+        </table>
+        <h2 style="text-align:center">CUSTOMER INFO</h2>
+        <table class="table table-bordered">
+            <tr>
+                <td>Tên: </td>
+                <td>@customer.NameCus</td>
+            </tr>
+            <tr>
+                <td>Số điện thoại: </td>
+                <td>@customer.PhoneCus</td>
+            </tr>
+            <tr>
+                <td>Ngày đặt: </td>
+                <td>@DateTime.Now.ToShortDateString()</td>
+            </tr>
+            <tr>
+                <td colspan="2" style="text-align: center;">
+                    @Html.ActionLink("Đặt hàng", "AgreeCart", null, new { @class = "btn btn-primary", style = "background-color: #33CCFF; border: none;" })
+                </td>
+            </tr>
+        </table>
+    </div>
 

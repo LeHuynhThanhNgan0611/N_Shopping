@@ -81,8 +81,20 @@ namespace DemoWeb2.Controllers
         }
         public ActionResult Logout()
         {
-            Session.Clear();
-            return RedirectToAction("Index", "Home");
+            if (Session != null)
+            {
+                Session.Clear();
+            }
+
+            if (Response != null)
+            {
+                // Xóa cookie
+                var authCookie = new HttpCookie("YourAuthCookieName");
+                authCookie.Expires = DateTime.Now.AddDays(-1);
+                Response.Cookies.Add(authCookie);
+            }
+
+            return RedirectToAction("Login");
         }
     }
 

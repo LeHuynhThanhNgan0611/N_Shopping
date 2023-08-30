@@ -1,5 +1,6 @@
 ﻿@model IEnumerable<DemoWeb2.Models.OrderPro>
 
+
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout1.cshtml";
@@ -50,11 +51,6 @@
                         id =
                    item.ID
                     }, new { @class = "btn btn-primary" })
-                    @Html.ActionLink("Xóa", "Delete", new
-                    {
-                        id =
-                   item.ID
-                    }, new { @class = "btn btn-danger" })
                 </td>
             </tr>
         }

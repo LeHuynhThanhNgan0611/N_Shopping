@@ -17,7 +17,7 @@
         <div class="col-lg-9">
             <nav class="navbar navbar-expand-lg bg-light navbar-light py-3 py-lg-0 px-0">
                 <a href="" class="text-decoration-none d-block d-lg-none">
-                    <h1 class="m-0 display-5 font-weight-semi-bold"><span class="text-primary font-weight-bold border px-3 mr-1">E</span>Shopper</h1>
+                    <h1 class="m-0 display-5 font-weight-semi-bold"><span class=" font-weight-bold border px-3 mr-1" style="color:#00FFFF;">N</span>Shopping</h1>
                 </a>
                 <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
                     <span class="navbar-toggler-icon"></span>
@@ -30,9 +30,18 @@
                         <a class="nav-link" href="~/CustomerProduct/Contact">Liên hệ</a>
                     </div>
                     <div class="navbar-nav ml-auto py-0">
-                        <a href="~/Users/Login" class="nav-item nav-link">Đăng nhập</a>
-                        <a href="~/Users/Register" class="nav-item nav-link">Đăng ký</a>
+                        @if (Session["TaiKhoan"] != null && Session["TaiKhoan"] is DemoWeb2.Models.Customer customer)
+                        {
+                            <p class="nav-item nav-link">Hello @customer.NameCus</p>
+                            <a href="~/Users/Logout" class="nav-item nav-link">Đăng xuất</a>
+                        }
+                        else
+                        {
+                            <a href="~/Users/Login" class="nav-item nav-link">Đăng nhập</a>
+                            <a href="~/Users/Register" class="nav-item nav-link">Đăng ký</a>
+                        }
                     </div>
+
                 </div>
             </nav>
             <!-- Page Header Start -->
@@ -61,7 +70,7 @@
             <div class="contact-form">
                 <div id="success"></div>
                 <div class="d-flex flex-column mb-3">
-                    <h5 class="font-weight-semi-bold mb-3">E Shopper </h5>
+                    <h5 class="font-weight-semi-bold mb-3">N Shopping </h5>
                     <p class="mb-2"><i class="fa fa-map-marker-alt text-primary mr-3"></i>10 Quốc lộ 22, Tân Xuân, Hóc Môn,Thành phố Hồ Chí Minh</p>
                     <p class="mb-2"><i class="fa fa-envelope text-primary mr-3"></i>20dh110764@st.huflit.edu.vn</p>
                     <p class="mb-2"><i class="fa fa-phone-alt text-primary mr-3"></i>+012 345 67890</p>

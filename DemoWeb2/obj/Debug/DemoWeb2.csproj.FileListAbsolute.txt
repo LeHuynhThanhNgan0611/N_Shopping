@@ -85,3 +85,5 @@ D:\DemoWeb2\DemoWeb2\bin\PagedList.dll
 D:\DemoWeb2\DemoWeb2\bin\PagedList.Mvc.dll
 D:\DemoWeb2\DemoWeb2\bin\PagedList.xml
 D:\DemoWeb2\DemoWeb2\bin\PagedList.Mvc.xml
+D:\DemoWeb2\DemoWeb2\bin\Facebook.dll
+D:\DemoWeb2\DemoWeb2\bin\Facebook.xml

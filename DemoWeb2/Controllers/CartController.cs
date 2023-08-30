@@ -1,4 +1,5 @@
 ﻿using DemoWeb2.Models;
+using Microsoft.Ajax.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -124,7 +125,7 @@ namespace DemoWeb2.Controllers
                 return RedirectToAction("Index", "CustomerProduct");
             ViewBag.TotalNumber = GetTotalNumber();
             ViewBag.TotalPrice = GetTotalPrice();
-            return View(myCart); //Trả về View xác nhận đặt hàng
+            return View(myCart);//Trả về View xác nhận đặt hàng
         }
 
         DBSportStore1Entities database = new DBSportStore1Entities();

@@ -257,6 +257,7 @@
     <Content Include="Content\admin\dist\js\pages\dashboard.js" />
     <Content Include="Content\admin\dist\js\pages\dashboard2.js" />
     <Content Include="Content\admin\dist\js\pages\dashboard3.js" />
+    <Content Include="Content\css\login.css" />
     <Content Include="Content\css\style.css" />
     <Content Include="Content\css\style.min.css" />
     <Content Include="Content\img\carousel-1.jpg" />
@@ -289,6 +290,7 @@
     <Content Include="Content\img\vendor-6.jpg" />
     <Content Include="Content\img\vendor-7.jpg" />
     <Content Include="Content\img\vendor-8.jpg" />
+    <Content Include="Content\js\login.js" />
     <Content Include="Content\js\main.js" />
     <Content Include="Content\lib\easing\easing.js" />
     <Content Include="Content\lib\easing\easing.min.js" />
@@ -2423,10 +2425,6 @@
     <Content Include="Views\Cart\ConfirmCart.cshtml" />
     <Content Include="Views\Shared\CategoriesParitialView.cshtml" />
     <Content Include="Views\CustomerProduct\Contact.cshtml" />
-    <Content Include="Views\OrderProes\Create.cshtml" />
-    <Content Include="Views\OrderProes\Details.cshtml" />
-    <Content Include="Views\OrderProes\Edit.cshtml" />
-    <Content Include="Views\OrderProes\Index.cshtml" />
     <Content Include="Views\Customers\Create.cshtml" />
     <Content Include="Views\Customers\Delete.cshtml" />
     <Content Include="Views\Customers\Details.cshtml" />
@@ -2437,6 +2435,11 @@
     <Content Include="Views\CustomerProduct\Shop.cshtml" />
     <Content Include="Views\Shared\_CateFooterView.cshtml" />
     <Content Include="Views\Users\Logout.cshtml" />
+    <Content Include="Views\OrderProes\Create.cshtml" />
+    <Content Include="Views\OrderProes\Delete.cshtml" />
+    <Content Include="Views\OrderProes\Details.cshtml" />
+    <Content Include="Views\OrderProes\Index.cshtml" />
+    <Content Include="Views\OrderProes\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

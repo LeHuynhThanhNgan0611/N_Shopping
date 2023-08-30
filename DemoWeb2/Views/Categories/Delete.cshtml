@@ -6,7 +6,7 @@
 }
 
 <div style="margin: 10px auto; width: 70%;">
-    <h3 style="text-align:center">
+    <h3 style="text-align:center; color:red; font-weight:600">
         BẠN CÓ CHẮC CHẮN MUỐN XÓA CATEGORY
         NÀY?
     </h3>
@@ -31,7 +31,7 @@
             @Html.AntiForgeryToken()
             @Html.HiddenFor(model => model.Id)
             <div class="form-actions no-color">
-                <input type="submit" value="XÓA" class="btn btn-danger" /> |
+                <input type="submit" value="XÓA" class="btn btn-danger" /> 
                 @Html.ActionLink("TRỞ LẠI", "Index")
             </div>
         }

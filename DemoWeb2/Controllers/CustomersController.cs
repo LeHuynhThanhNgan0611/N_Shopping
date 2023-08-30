@@ -6,7 +6,9 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI;
 using DemoWeb2.Models;
+using PagedList;
 
 namespace DemoWeb2.Controllers
 {
@@ -15,9 +17,31 @@ namespace DemoWeb2.Controllers
         private DBSportStore1Entities db = new DBSportStore1Entities();
 
         // GET: Customers
-        public ActionResult Index()
+        public ActionResult Index(string currentFilter, string SearchString, int? page)
         {
-            return View(db.Customers.ToList());
+            //return view(db.customers.tolist());
+            var lstCus = new List<Customer>();
+            if (SearchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                SearchString = currentFilter;
+            }
+            if (!string.IsNullOrEmpty(SearchString))
+            {
+                lstCus = db.Customers.Where(n => n.NameCus.Contains(SearchString)).ToList();
+            }
+            else
+            {
+                lstCus = db.Customers.ToList();
+            }
+            ViewBag.CurrentProduct = SearchString;
+            int pageSize = 6;
+            int pageNumber = (page ?? 1);
+            lstCus = lstCus.OrderByDescending(n => n.IDCus).ToList();
+            return View(lstCus.ToPagedList(pageNumber, pageSize));
         }
 
         // GET: Customers/Details/5
@@ -46,14 +70,30 @@ namespace DemoWeb2.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "IDCus,NameCus,PhoneCus,EmailCus,PassCus")] Customer customer)
+        public ActionResult Create([Bind(Include = "IDCus,NameCus,PhoneCus,EmailCus,PassCus")] Customer customer, OrderPro orderPro)
         {
             if (ModelState.IsValid)
             {
-                db.Customers.Add(customer);
+                // Xóa toàn bộ các sản phẩm trong đơn hàng
+                db.OrderDetails.RemoveRange(db.OrderDetails.Where(od => od.ID == orderPro.ID));
+
+                // Thêm lại danh sách sản phẩm mới (nếu có)
+                if (orderPro.Products != null)
+                {
+                    foreach (var product in orderPro.Products)
+                    {
+                        if (product != null)
+                        {
+                            db.OrderDetails.Add(new OrderDetail { ID = orderPro.ID, IDProduct = product.ProductID });
+                        }
+                    }
+                }
+
+                db.Entry(orderPro).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+
 
             return View(customer);
         }

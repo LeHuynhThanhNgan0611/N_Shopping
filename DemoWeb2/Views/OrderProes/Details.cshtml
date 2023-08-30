@@ -1,32 +1,57 @@
-﻿
+﻿@model DemoWeb2.Models.OrderPro
+
 @{
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_Layout1.cshtml";
 }
+<div style="margin: 10px auto; width: 70%;">
+    <h2 class="text-center">CHI TIẾT ORDER</h2>
 
-@model List<DemoWeb2.Models.OrderDetail>
+    <div>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                NGÀY ĐẶT HÀNG
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.DateOrder)
+            </dd>
 
-<h2>Order Details</h2>
+            <dt>
+                ĐỊA CHỈ GIAO HÀNG
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.AddressDeliverry)
+            </dd>
 
-<table class="table">
-    <thead>
+            <dt>
+                KHÁCH HÀNG
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Customer.NameCus)
+            </dd>
+        </dl>
+    </div>
+
+    <h4 class="text-center">Danh sách sản phẩm</h4>
+    <table class="table">
         <tr>
-            <th>Product Name</th>
-            <th>Quantity</th>
-            <th>Unit Price</th>
+            <th>Name</th>
+            <th>Price</th>
+            <!-- Các cột khác tùy thuộc vào thuộc tính của sản phẩm -->
         </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
+        @foreach (var product in Model.Products)
         {
             <tr>
-                <td>@item.Product.NamePro</td>
-                <td>@item.Quantity</td>
-                <td>@item.UnitPrice</td>
+                <td>@product.NamePro</td>
+                <td>@product.Price</td>
+                <!-- Các cột khác tùy thuộc vào thuộc tính của sản phẩm -->
             </tr>
         }
-    </tbody>
-</table>
-<p>
-    @Html.ActionLink("Back to List", "Index")
-</p>
+    </table>
+
+    <p>
+        @Html.ActionLink("SỬA", "Edit", new { id = Model.ID }, new { @class = "btn btn-success" }) 
+        @Html.ActionLink("TRỞ LẠI", "Index")
+    </p>
+</div>

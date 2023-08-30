@@ -1,4 +1,7 @@
-﻿@model IEnumerable<DemoWeb2.Models.Customer>
+﻿@*@model IEnumerable<DemoWeb2.Models.Customer>*@
+@using PagedList;
+@using PagedList.Mvc;
+@model PagedList.IPagedList<DemoWeb2.Models.Customer>
 
 @{
     ViewBag.Title = "Index";
@@ -8,21 +11,39 @@
     <h2 style="text-align: center">THÔNG TIN CUSTOMER</h2>
 
     @*<p>
-        @Html.ActionLink("TẠO MỚI", "Create", null, new
-            {
-                @class = "btn btn-primary"
-            })
-    </p>*@
-    <table class="table">
+            @Html.ActionLink("TẠO MỚI", "Create", null, new
+                {
+                    @class = "btn btn-primary"
+                })
+        </p>*@
+    @using (Html.BeginForm("Index", "Customers", FormMethod.Get))
+    {
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <form action="simple-results.html">
+                    <div class="input-group input-group-lg">
+                        @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-control ", placeholder = "Type your keywords here", value = "Lorem ipsum" })
+                        @*<input type="search" class="form-control form-control-lg" placeholder="Type your keywords here" value="Lorem ipsum">*@
+                        <div class="input-group-append">
+                            <button type="submit" class="btn btn-default">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    }
+    <table class="table" style="margin-top: 20px">
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.NameCus)
+                TÊN TÀI KHOẢN
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.PhoneCus)
+                SỐ ĐIỆN THOẠI
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.EmailCus)
+                EMAIL
             </th>
             <th></th>
         </tr>
@@ -39,7 +60,7 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.EmailCus)
                 </td>
-                @*<td>
+                <td>
                     @Html.ActionLink("Sửa", "Edit", new
                         {
                             id =
@@ -55,9 +76,11 @@
                         id =
                    item.IDCus
                     }, new { @class = "btn btn-danger" })
-                </td>*@
+                </td>
             </tr>
         }
 
     </table>
+    Trang @(Model.PageCount<Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page, currentFilter = ViewBag.CurrentFilter }))
 </div>

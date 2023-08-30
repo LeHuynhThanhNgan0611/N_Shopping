@@ -1,0 +1,17 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\DemoWeb2",
+    "\\DemoWeb2\\Content",
+    "\\DemoWeb2\\Content\\css",
+    "\\DemoWeb2\\Controllers",
+    "\\DemoWeb2\\Views",
+    "\\DemoWeb2\\Views\\Admin",
+    "\\DemoWeb2\\Views\\Cart",
+    "\\DemoWeb2\\Views\\CustomerProduct",
+    "\\DemoWeb2\\Views\\Products",
+    "\\DemoWeb2\\Views\\Users"
+  ],
+  "SelectedNode": "\\DemoWeb2\\Views\\Cart\\GetCartInfo.cshtml",
+  "PreviewInSolutionExplorer": false
+}

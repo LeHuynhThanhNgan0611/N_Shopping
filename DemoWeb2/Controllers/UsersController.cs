@@ -17,6 +17,9 @@ using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using System.Threading.Tasks;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNetCore.Authentication;
+using System.Web.Security;
 
 namespace DemoWeb2.Controllers
 {
@@ -71,7 +74,6 @@ namespace DemoWeb2.Controllers
         [HttpPost]
         public ActionResult Login(Customer cust)
         {
-
             if (ModelState.IsValid)
             {
                 if (string.IsNullOrEmpty(cust.NameCus))
@@ -90,8 +92,34 @@ namespace DemoWeb2.Controllers
                         ViewBag.ThongBao = "Tên đăng nhập hoặc mật khẩu không đúng";
                 }
             }
+
+            var googleUser = database.Customers.FirstOrDefault(k => k.GoogleId == (string)Session["GoogleId"]);
+            if (googleUser != null)
+            {
+                Session["TaiKhoan"] = googleUser;
+                return RedirectToAction("Index", "CustomerProduct");
+            }
+
+            return RedirectToAction("Login", "Login");
+        }
+
+        public ActionResult LoginSuccess()
+        {
+            if (Session["GoogleId"] == null)
+            {
+                return RedirectToAction("Login", "Login");
+            }
+
+            var email = (string)Session["Email"];
+            var name = (string)Session["Name"];
+            var googleId = (string)Session["GoogleId"];
+
+            ViewBag.Email = email;
+            ViewBag.Name = name;
+            ViewBag.GoogleId = googleId;
             return View();
         }
+
         [AllowAnonymous]
         public ActionResult GoogleLogin()
         {
@@ -142,7 +170,7 @@ namespace DemoWeb2.Controllers
                 ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
                 request.AddParameter("grant_type", "authorization_code");
                 request.AddParameter("code", code);
-                request.AddParameter("redirect_uri", "https://localhost:59750/Login/GoogleLoginCallback");
+                request.AddParameter("redirect_uri", "https://localhost:44354/Login/GoogleLoginCallback");
 
                 request.AddParameter("client_id", "1098593658235-tt8iff6m9tg8l2cfdngofo6j3phtc5dn.apps.googleusercontent.com");
                 request.AddParameter("client_secret", "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");
@@ -178,13 +206,34 @@ namespace DemoWeb2.Controllers
                     // ... (Thêm các thông tin khác)
                 };
 
-                var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
-                var principal = new ClaimsPrincipal(identity);
+                var identity = new ClaimsIdentity(claims, DefaultAuthenticationTypes.ApplicationCookie);
 
-                Session["user"] = customer;
+                // Sử dụng FormsAuthenticationTicket để tạo cookie
+                var ticket = new FormsAuthenticationTicket(
+                    1,
+                    user["id"].ToString(),
+                    DateTime.Now,
+                    DateTime.Now.AddMinutes(30), // Thời hạn của cookie
+                    false, // IsPersistent
+                    identity.Name,
+                    FormsAuthentication.FormsCookiePath);
+
+                var encryptedTicket = FormsAuthentication.Encrypt(ticket);
+                var cookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket);
+                Response.Cookies.Add(cookie);
+
+                // Tạo cookie xác thực bằng FormsAuthentication
+                FormsAuthentication.SetAuthCookie(customer.GoogleId, false);
+
+                Session["user"] = customer.GoogleId;
+
                 return RedirectToAction("Index", "CustomerProduct");
-
             }
+
+            ////Session["user"] = customer;
+            //    return RedirectToAction("Index", "CustomerProduct");
+
+            //}
             else
             {
                 ViewBag.ReturnData = "";

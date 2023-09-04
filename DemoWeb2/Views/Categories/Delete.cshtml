@@ -2,38 +2,29 @@
 
 @{
     ViewBag.Title = "Delete";
-    Layout = "~/Views/Shared/_Layout1.cshtml";
+    ViewBag.headTitle = "Xóa danh mục";
+    Layout = "~/Views/Shared/_admin_Layout.cshtml";
 }
 
-<div style="margin: 10px auto; width: 70%;">
-    <h3 style="text-align:center; color:red; font-weight:600">
-        BẠN CÓ CHẮC CHẮN MUỐN XÓA CATEGORY
-        NÀY?
-    </h3>
-    <div>
-        <hr />
-        <dl class="dl-horizontal">
-            <dt>
-                MÃ CATEGORY
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.IDCate)
-            </dd>
-            <dt>
-                TÊN CATEGORY
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.NameCate)
-            </dd>
-        </dl>
-        @using (Html.BeginForm())
-        {
-            @Html.AntiForgeryToken()
-            @Html.HiddenFor(model => model.Id)
-            <div class="form-actions no-color">
-                <input type="submit" value="XÓA" class="btn btn-danger" /> 
-                @Html.ActionLink("TRỞ LẠI", "Index")
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+
+    <div class="swal-overlay swal-overlay--show-modal">
+        <div class="swal-modal">
+            <div class="swal-title" style="">Cảnh báo</div>
+            <div class="swal-text" style="">Bạn có chắc chắn là muốn xóa sản phẩm này?</div>
+            <div class="swal-footer">
+
+                <div class="swal-button-container">
+                    <button onclick="location.href='@Url.Action("Index", "Categories")'" class="swal-button swal-button--cancel">Hủy bỏ</button>
+                </div>
+
+                <div class="swal-button-container">
+                    <input type="submit" value="Xóa" class="swal-button swal-button--confirm" />
+                </div>
             </div>
-        }
+        </div>
     </div>
-</div>
+ }

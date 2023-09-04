@@ -11,6 +11,10 @@ namespace DemoWeb2.Controllers
     {
         private DBSportStore1Entities database = new DBSportStore1Entities();
         // GET: Admin
+        public ActionResult Index()
+        {
+            return View();
+        }
         [HttpGet]
         public ActionResult Login()
         {

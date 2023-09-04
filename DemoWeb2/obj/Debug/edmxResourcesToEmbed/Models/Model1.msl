@@ -58,6 +58,8 @@
     <EntitySetMapping Name="Products">
       <EntityTypeMapping TypeName="DBSportStore1Model.Product">
         <MappingFragment StoreEntitySet="Products">
+          <ScalarProperty Name="Sale" ColumnName="Sale" />
+          <ScalarProperty Name="Sold" ColumnName="Sold" />
           <ScalarProperty Name="ProductID" ColumnName="ProductID" />
           <ScalarProperty Name="NamePro" ColumnName="NamePro" />
           <ScalarProperty Name="DecriptionPro" ColumnName="DecriptionPro" />

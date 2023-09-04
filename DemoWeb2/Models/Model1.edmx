@@ -64,6 +64,8 @@
           <Property Name="Category" Type="nchar" MaxLength="20" />
           <Property Name="Price" Type="decimal" Precision="18" Scale="2" />
           <Property Name="ImagePro" Type="nvarchar(max)" />
+          <Property Name="Sold" Type="int" />
+          <Property Name="Sale" Type="int" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -219,6 +221,8 @@
           <Property Name="ImagePro" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Category1" Relationship="Self.FK_Pro_Category" FromRole="Products" ToRole="Category" />
           <NavigationProperty Name="OrderDetails" Relationship="Self.FK__OrderDeta__IDPro__300424B4" FromRole="Products" ToRole="OrderDetail" />
+          <Property Name="Sold" Type="Int32" />
+          <Property Name="Sale" Type="Int32" />
         </EntityType>
         <Association Name="FK_Pro_Category">
           <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
@@ -366,6 +370,8 @@
           <EntitySetMapping Name="Products">
             <EntityTypeMapping TypeName="DBSportStore1Model.Product">
               <MappingFragment StoreEntitySet="Products">
+                <ScalarProperty Name="Sale" ColumnName="Sale" />
+                <ScalarProperty Name="Sold" ColumnName="Sold" />
                 <ScalarProperty Name="ProductID" ColumnName="ProductID" />
                 <ScalarProperty Name="NamePro" ColumnName="NamePro" />
                 <ScalarProperty Name="DecriptionPro" ColumnName="DecriptionPro" />

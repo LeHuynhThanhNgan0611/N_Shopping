@@ -379,6 +379,47 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Code2Night.jpeg" />
+    <Content Include="Content\Assets\css\main.css" />
+    <Content Include="Content\Assets\css\style.css" />
+    <Content Include="Content\Assets\css\util.css" />
+    <Content Include="Content\Assets\js\bootstrap.min.js" />
+    <Content Include="Content\Assets\js\footable.js" />
+    <Content Include="Content\Assets\js\jquery-3.2.1.min.js" />
+    <Content Include="Content\Assets\js\main.js" />
+    <Content Include="Content\Assets\js\plugins\bootstrap-datepicker.min.js" />
+    <Content Include="Content\Assets\js\plugins\bootstrap-notify.min.js" />
+    <Content Include="Content\Assets\js\plugins\chart.js" />
+    <Content Include="Content\Assets\js\plugins\dataTables.bootstrap.min.js" />
+    <Content Include="Content\Assets\js\plugins\fullcalendar.min.js" />
+    <Content Include="Content\Assets\js\plugins\jquery-ui.custom.min.js" />
+    <Content Include="Content\Assets\js\plugins\jquery.dataTables.min.js" />
+    <Content Include="Content\Assets\js\plugins\jquery.vmap.min.js" />
+    <Content Include="Content\Assets\js\plugins\jquery.vmap.sampledata.js" />
+    <Content Include="Content\Assets\js\plugins\jquery.vmap.world.js" />
+    <Content Include="Content\Assets\js\plugins\moment.min.js" />
+    <Content Include="Content\Assets\js\plugins\pace.min.js" />
+    <Content Include="Content\Assets\js\plugins\select2.min.js" />
+    <Content Include="Content\Assets\js\plugins\sweetalert.min.js" />
+    <Content Include="Content\Assets\js\popper.min.js" />
+    <Content Include="Content\Assets\vendor\animate\animate.css" />
+    <Content Include="Content\Assets\vendor\bootstrap\css\bootstrap-grid.css" />
+    <Content Include="Content\Assets\vendor\bootstrap\css\bootstrap-grid.min.css" />
+    <Content Include="Content\Assets\vendor\bootstrap\css\bootstrap-reboot.css" />
+    <Content Include="Content\Assets\vendor\bootstrap\css\bootstrap-reboot.min.css" />
+    <Content Include="Content\Assets\vendor\bootstrap\css\bootstrap.css" />
+    <Content Include="Content\Assets\vendor\bootstrap\css\bootstrap.min.css" />
+    <Content Include="Content\Assets\vendor\bootstrap\js\bootstrap.js" />
+    <Content Include="Content\Assets\vendor\bootstrap\js\bootstrap.min.js" />
+    <Content Include="Content\Assets\vendor\bootstrap\js\popper.js" />
+    <Content Include="Content\Assets\vendor\bootstrap\js\popper.min.js" />
+    <Content Include="Content\Assets\vendor\bootstrap\js\tooltip.js" />
+    <Content Include="Content\Assets\vendor\css-hamburgers\hamburgers.css" />
+    <Content Include="Content\Assets\vendor\css-hamburgers\hamburgers.min.css" />
+    <Content Include="Content\Assets\vendor\jquery\jquery-3.2.1.min.js" />
+    <Content Include="Content\Assets\vendor\select2\select2.css" />
+    <Content Include="Content\Assets\vendor\select2\select2.js" />
+    <Content Include="Content\Assets\vendor\select2\select2.min.css" />
+    <Content Include="Content\Assets\vendor\select2\select2.min.js" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-grid.rtl.css" />
@@ -2766,6 +2807,7 @@
     <Content Include="Content\style.css" />
     <Content Include="Content\stylepro.css" />
     <Content Include="favicon.ico" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Images\AnyConv.com__ao_khoac_1.jpg" />
@@ -2793,6 +2835,7 @@
     <Content Include="Images\ao_thun_5.jpg" />
     <Content Include="Images\ao_thu_3.jpg" />
     <Content Include="Images\Giohang.gif" />
+    <Content Include="Images\logo.png" />
     <Content Include="Images\mo_ta.jpg" />
     <Content Include="Images\mo_ta_quan.jpg" />
     <Content Include="Images\phukien.jpg" />
@@ -3058,6 +3101,17 @@
     <Content Include="Content\plugin\ckeditor\SECURITY.md" />
     <Content Include="Content\plugin\ckeditor\skins\moono-lisa\readme.md" />
     <Content Include="Content\css\login1.css" />
+    <Content Include="Content\Assets\vendor\bootstrap\css\bootstrap-grid.css.map" />
+    <Content Include="Content\Assets\vendor\bootstrap\css\bootstrap-grid.min.css.map" />
+    <Content Include="Content\Assets\vendor\bootstrap\css\bootstrap-reboot.css.map" />
+    <Content Include="Content\Assets\vendor\bootstrap\css\bootstrap-reboot.min.css.map" />
+    <Content Include="Content\Assets\vendor\bootstrap\css\bootstrap.css.map" />
+    <Content Include="Content\Assets\vendor\bootstrap\css\bootstrap.min.css.map" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\fontawesome-webfont.woff2" />
+    <Content Include="fonts\FontAwesome.otf" />
     <None Include="Properties\PublishProfiles\ngan061102-001-site1 - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\ngan061102-001-site1 - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
@@ -3122,6 +3176,8 @@
     <Content Include="Views\Users\Login.cshtml" />
     <Content Include="Views\Login\GoogleLoginCallback.cshtml" />
     <Content Include="Views\Login\FacebookLoginCallback.cshtml" />
+    <Content Include="Views\Shared\_admin_Layout.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

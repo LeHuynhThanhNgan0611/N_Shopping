@@ -12,10 +12,8 @@
         <a href="@Url.Action("Login", "Login")">
             <i class="fa-brands fa-google"></i>
         </a>
-        <a href=""><i class="fa-brands fa-facebook-f"></i></a>
+        <a href="@Url.Action("LoginFacebook", "Login")"><i class="fa-brands fa-facebook-f"></i></a>
         <a href=""><i class="fa-brands fa-instagram"></i></a>
-        @*<a target="_blank" href="@ViewBag.response"><i class="fa-brands fa-google"></i></a>*@
-        @*<a href=""><i class="fa-brands fa-google"></i></a>*@
     </div>
     @using (Html.BeginForm("Login", "Users"))
     {

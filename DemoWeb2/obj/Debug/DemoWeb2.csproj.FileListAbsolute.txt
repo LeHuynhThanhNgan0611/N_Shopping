@@ -290,3 +290,5 @@ D:\ĐỒ ÁN PHẦM MỀM\DemoWeb2\DemoWeb2\bin\Xamarin.Essentials.dll
 D:\ĐỒ ÁN PHẦM MỀM\DemoWeb2\DemoWeb2\bin\DocumentFormat.OpenXml.xml
 D:\ĐỒ ÁN PHẦM MỀM\DemoWeb2\DemoWeb2\bin\Xamarin.Essentials.pdb
 D:\ĐỒ ÁN PHẦM MỀM\DemoWeb2\DemoWeb2\bin\Xamarin.Essentials.xml
+D:\ĐỒ ÁN PHẦM MỀM\DemoWeb2\DemoWeb2\bin\Microsoft.Owin.Security.Facebook.dll
+D:\ĐỒ ÁN PHẦM MỀM\DemoWeb2\DemoWeb2\bin\Microsoft.Owin.Security.Facebook.xml

@@ -2,8 +2,8 @@
 @model IEnumerable<DemoWeb2.Models.Category>
 
 @{
-    ViewBag.Title = "Danh sách loại";
-    ViewBag.headTitle = "Danh sách loại";
+    ViewBag.Title = "Danh sách danh mục";
+    ViewBag.headTitle = "Danh sách danh mục";
     Layout = "~/Views/Shared/_admin_Layout.cshtml";
     AdminUser adminUser = Session["TaiKhoan"] as AdminUser;
 }
@@ -30,45 +30,28 @@
             </th>
         </tr>
         @foreach (var item in Model)
-        {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.IDCate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NameCate)
-        </td>
-        @*<td>
-            @Html.ActionLink("Sửa", "Edit", new { id = item.Id }, new
-            {
-           @class = "btn btn-success"
-            })
-            @Html.ActionLink("Chi tiết", "Details", new { id = item.Id },
-           new { @class = "btn btn-primary" })
-            @Html.ActionLink("Xóa", "Delete", new { id = item.Id }, new
-            {
-           @class = "btn btn-danger"
-            })
-        </td>*@
-        <td>
+         {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IDCate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NameCate)
+                </td>
+                <td>
 
-            <button class="btn btn-primary btn-sm trash" type="button" title="Xóa" id="delete-btn"
-                    onclick="location.href='@Url.Action("Delete", "Categories",new { id = item.Id })'">
-                <i class="fas fa-trash-alt"></i>
-            </button>
-            <button class="btn btn-primary btn-sm edit" type="button" title="Sửa"
-                    onclick="location.href='@Url.Action("Edit", "Categories",new { id = item.Id })'">
-                <i class="fas fa-edit"></i>
-            </button>
-            <button class="btn btn-primary btn-sm info" type="button" title="Sửa"
-                    onclick="location.href='@Url.Action("Detail", "Categories",new { id = item.Id })'">
-                <i class="fas fa-info-circle"></i>
-            </button>
-        </td>
-    </tr>
-        }
+                    <button class="btn btn-primary btn-sm trash" type="button" title="Xóa" id="delete-btn"
+                            onclick="location.href='@Url.Action("Delete", "Categories",new { id = item.Id })'">
+                        <i class="fas fa-trash-alt"></i>
+                    </button>
+                    <button class="btn btn-primary btn-sm edit" type="button" title="Sửa"
+                            onclick="location.href='@Url.Action("Edit", "Categories",new { id = item.Id })'">
+                        <i class="fas fa-edit"></i>
+                    </button>
+                </td>
+            </tr>
+         }
     </table>
-</div>
 
 @* Tạo liên kết các trang *@
 

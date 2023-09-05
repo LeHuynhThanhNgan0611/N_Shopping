@@ -2,53 +2,29 @@
 
 @{
     ViewBag.Title = "Delete";
-    Layout = "~/Views/Shared/_Layout1.cshtml";
+    ViewBag.headTitle = "Xóa sản phẩm";
+    Layout = "~/Views/Shared/_admin_Layout.cshtml";
 }
 
-<div style="margin: 10px auto; width: 70%;">
-    <h3 style="text-align:center; color:red; font-weight:600">BẠN CÓ CHẮC CHẮN MUỐN XÓA SẢN PHẨM NÀY?</h3>
-    <div>
-        <hr />
-        <dl class="dl-horizontal">
-            <dt>
-                TÊN SẢN PHẨM
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.NamePro)
-            </dd>
-            <dt>
-                MÔ TẢ
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.DecriptionPro)
-            </dd>
-            <dt>
-                GIÁ
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.Price)
-            </dd>
-            <dt>
-                HÌNH ẢNH
-            </dt>
-            <dd>
-                <img style="width:60%" src="~/Images/@Model.ImagePro" />
-            </dd>
-            <dt>
-                NHÓM SẢN PHẨM
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.Category1.NameCate)
-            </dd>
-        </dl>
-        @using (Html.BeginForm())
-        {
-            @Html.AntiForgeryToken()
-            <div class="form-actions no-color">
-                <input type="submit" value="XÓA" class="btn btn-danger" /> 
-                @Html.ActionLink("TRỞ LẠI", "Index")
-            </div>
-        }
-    </div>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
 
-</div>
+
+    <div class="swal-overlay swal-overlay--show-modal">
+        <div class="swal-modal">
+            <div class="swal-title" style="">Cảnh báo</div>
+            <div class="swal-text" style="">Bạn có chắc chắn là muốn xóa danh mục này?</div>
+            <div class="swal-footer">
+
+                <div class="swal-button-container">
+                    <button onclick="location.href='@Url.Action("Index", "Products")'" class="swal-button swal-button--cancel">Hủy bỏ</button>
+                </div>
+
+                <div class="swal-button-container">
+                    <input type="submit" value="Xóa" class="swal-button swal-button--confirm" />
+                </div>
+            </div>
+        </div>
+    </div>
+}

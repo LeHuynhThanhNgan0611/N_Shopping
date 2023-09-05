@@ -38,11 +38,11 @@ namespace DemoWeb.Controllers
                 return Content("LỖI TẠO MỚI CATEGORY");
             }
         }
-        public ActionResult Details(int id)
-        {
-            var category = database.Categories.Where(c => c.Id == id).FirstOrDefault();
-            return View(category);
-        }
+        //public ActionResult Details(int id)
+        //{
+        //    var category = database.Categories.Where(c => c.Id == id).FirstOrDefault();
+        //    return View(category);
+        //}
 
         [HttpGet]
         public ActionResult Edit(int id)

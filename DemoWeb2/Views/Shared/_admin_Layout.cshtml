@@ -22,13 +22,13 @@
 </head>
 <body onload="time()" class="app sidebar-mini rtl">
     @*@{ if (Session["NV"] == null)
-                    {
-                        Response.Redirect("~/Admin/Admin/Login");
-                    }; }
-    @using DemoWeb2.Models;
-    @{ DBSportStore1Entities _db = new DBSportStore1Entities();
-                    Staff session = (Staff)Session["NV"];
-                    Staff nv = _db.Staffs.Find(session.Id); }*@
+                        {
+                            Response.Redirect("~/Admin/Admin/Login");
+                        }; }
+        @using DemoWeb2.Models;
+        @{ DBSportStore1Entities _db = new DBSportStore1Entities();
+                        Staff session = (Staff)Session["NV"];
+                        Staff nv = _db.Staffs.Find(session.Id); }*@
     <!-- Navbar-->
     <header class="app-header">
         <!-- Sidebar toggle button--><a class="app-sidebar__toggle" href="#" data-toggle="sidebar"
@@ -50,11 +50,11 @@
             @*<img class="app-sidebar__user-avatar" src="~/Hinh/NhanVien/@Session["Avatar"].ToString()" width="50"
                 alt="User Image">*@
             @*<div>
-                @if (Session["NV"] != null)
-                {
-    <p class="app-sidebar__user-name"><b>@nv.FullName</b></p>
-                    <p class="app-sidebar__user-designation">@nv.Job_title1.Name</p>}
-            </div>*@
+                            @if (Session["NV"] != null)
+                            {
+                <p class="app-sidebar__user-name"><b>@nv.FullName</b></p>
+                                <p class="app-sidebar__user-designation">@nv.Job_title1.Name</p>}
+                        </div>*@
         </div>
         <hr>
         <ul class="app-menu">
@@ -64,7 +64,7 @@
                 </a>
             </li>
             <li>
-                <a class="app-menu__item" href="@Url.Action("Index","Product")">
+                <a class="app-menu__item" href="@Url.Action("Index","Products")">
                     <i class="app-menu__icon bx bxl-product-hunt"></i><span class="app-menu__label">Quản lý sản phẩm</span>
                 </a>
             </li>
@@ -142,7 +142,8 @@
     @Scripts.Render("~/bundles/adminjs")
     <script src="~/Scripts/Jquery/jquery.signalR-2.4.3.js"></script>
     <script src="~/signalr/hubs"></script>
-    <script>$(document).ready(function () {
+    <script>
+    $(document).ready(function () {
             var orderHub = $.connection.notifyHub;
 
             orderHub.client.orderPlaced = function (orderId) {
@@ -162,15 +163,16 @@
             }
         });</script>
 
-    <script type="text/javascript">// Thêm active class vào category
+    <script type="text/javascript">
+    // Thêm active class vào category
         const currentUrl = window.location.href
-        const getNameCate = currentUrl.split('Admin') ?.[1]
-                console.log(getNameCate)
+        const getNameCate = currentUrl.split('Admin')?.[1]
+        console.log(getNameCate)
         if (getNameCate) {
             const allCate = document.querySelectorAll('.app-menu__item')
             let activeCate
             for (var i = 0; i < allCate.length; i++) {
-                if (allCate[i].getAttribute('href').split('Admin') ?.[1] === getNameCate) {
+                if (allCate[i].getAttribute('href').split('Admin')?.[1] === getNameCate) {
                     activeCate = allCate[i]
                     break
                 }
@@ -220,7 +222,11 @@
             }
         }</script>
 
+    <script src="~/Content/plugin/ckeditor/ckeditor.js"></script>
 
+    <script src="~/Content/plugin/ckfinder/ckfinder.js"></script>
+
+    @RenderSection("scripts", required: false)
 
 
 </body>

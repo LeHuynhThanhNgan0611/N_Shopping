@@ -2,64 +2,83 @@
 @model DemoWeb2.Models.Product
 
 @{
-    ViewBag.Title = "Edit";
-    Layout = "~/Views/Shared/_Layout1.cshtml";
+    ViewBag.Title = "Chỉnh sửa";
+    ViewBag.headTitle = "Chỉnh sửa sản phẩm";
+    Layout = "~/Views/Shared/_admin_Layout.cshtml";
 }
 
-<div style="margin: 10px auto; width: 70%;">
-    <h2 class="text-center">CHỈNH SỬA SẢN PHẨM</h2>
-    @using (Html.BeginForm("Edit", "Products", FormMethod.Post, new { @enctype = "multipart/form-data", @class = "col-md-10" }))
+    @using (Html.BeginForm("Edit", "Products", FormMethod.Post))
     {
         @Html.AntiForgeryToken()
-        <div class="form-horizontal">
-            <hr />
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            @Html.HiddenFor(model => model.ProductID)
-            <div class="form-group">
-                TÊN SẢN PHẨM
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.NamePro, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.NamePro, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="form-group">
-                MÔ TẢ
-                <div class="col-md-10">
-                    <textarea id="editDec" name="DecriptionPro" class="form-control">@Model.DecriptionPro</textarea>
-                    @Html.ValidationMessageFor(model => model.DecriptionPro, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="form-group">
-                NHÓM SẢN PHẨM
-                <div class="col-md-10">
-                    @Html.DropDownList("Category", null, htmlAttributes: new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.Category, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="form-group">
-                GIÁ
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="form-group">
-                <img class="card-img-bottom" src="~/Images/@Model.ImagePro" alt="Card image" style="width:60%">
-                <div class="col-md-10 mt-3">
-                    CHỌN ẢNH MỚI
-                    <input type="file" name="ImagePro" style="padding-bottom: 20px;" />
-                    @Html.ValidationMessageFor(model => model.ImagePro, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10 mb-3 mt-3">
-                    <input type="submit" value="LƯU" class="btn btn-success" />
-                    <a href="@Url.Action("Index", "Products")" class="btn btn-default">QUAY LẠI</a>
+<div class="form-horizontal">
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.ProductID)
+
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="tile">
+                    <h3 class="tile-title">Chỉnh sửa thông tin sản phẩm</h3>
+                    <div class="tile-body">
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label class="control-label">Tên sản phẩm </label>
+                                @Html.EditorFor(model => model.NamePro, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.NamePro, "", new { @class = "text-danger" })
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <label class="control-label">Danh mục </label>
+                                @Html.DropDownList("Category", null, htmlAttributes: new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.Category, "", new { @class = "text-danger" })
+                            </div>
+
+                            <div class="form-group col-md-12">
+                                <label class="control-label">Mô tả </label>
+                                <textarea id="editDec" name="DecriptionPro" class="form-control">@Model.DecriptionPro</textarea>
+                                @Html.ValidationMessageFor(model => model.DecriptionPro, "", new { @class = "text-danger" })
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <label class="control-label">Giá </label>
+                                @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <label class="control-label">Hình ảnh</label>
+                                <br />
+                                <input type="file" name="ImagePro" />
+                                @Html.ValidationMessageFor(model => model.ImagePro, "", new { @class = "text-danger" })
+                                <div id="thumbbox">
+                                    <img height="450" width="400" alt="Thumb image" id="thumbimage"
+                                         style="display: none" />
+                                    <a class="removeimg" href="javascript:"></a>
+                                </div>
+                                <div id="boxchoice">
+                                    <a href="javascript:" class="Choicefile">
+                                        <i class="fas fa-cloud-upload-alt"></i>
+                                        Chọn ảnh
+                                    </a>
+                                    <p style="clear:both"></p>
+                                </div>                       
+                            </div>
+                            <div class="form-group col-md-4">
+                                <img class="card-img-bottom" src="~/Images/@Model.ImagePro" alt="Card image" style="width:60%">
+                            </div>
+                        </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Lưu" class="btn btn-success" />
+                            @Html.ActionLink("Trở lại", "Index", null, new { @class = "btn btn-app" })
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    }
-</div>
+     </div>
+</div>}
 @section scripts{
     <script>
         CKEDITOR.replace('editDec')

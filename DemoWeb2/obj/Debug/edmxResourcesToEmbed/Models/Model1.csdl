@@ -1,14 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="DBSportStore1Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-  <EntityType Name="AdminUser">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" />
-    <Property Name="NameUser" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="RoleUser" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="PasswordUser" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
-  </EntityType>
   <EntityType Name="Category">
     <Key>
       <PropertyRef Name="IDCate" />
@@ -119,7 +110,6 @@
     </ReferentialConstraint>
   </Association>
   <EntityContainer Name="DBSportStore1Entities" annotation:LazyLoadingEnabled="true">
-    <EntitySet Name="AdminUsers" EntityType="Self.AdminUser" />
     <EntitySet Name="Categories" EntityType="Self.Category" />
     <EntitySet Name="Customers" EntityType="Self.Customer" />
     <EntitySet Name="OrderDetails" EntityType="Self.OrderDetail" />
@@ -142,6 +132,12 @@
       <End Role="OrderDetail" EntitySet="OrderDetails" />
     </AssociationSet>
     <EntitySet Name="sysdiagrams" EntityType="DBSportStore1Model.sysdiagram" />
+    <EntitySet Name="AdminUsers" EntityType="DBSportStore1Model.AdminUser" />
+    <EntitySet Name="Job_title" EntityType="DBSportStore1Model.Job_title" />
+    <AssociationSet Name="FK_AdminUser_Job_title" Association="DBSportStore1Model.FK_AdminUser_Job_title">
+      <End Role="Job_title" EntitySet="Job_title" />
+      <End Role="AdminUser" EntitySet="AdminUsers" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="sysdiagram">
     <Key>
@@ -153,4 +149,40 @@
     <Property Name="version" Type="Int32" />
     <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
   </EntityType>
+  <EntityType Name="AdminUser">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FullName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Avatar" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Address" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="DateOfBirth" Type="DateTime" Precision="0" />
+    <Property Name="CMT" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="Phone" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+    <Property Name="Job_title" Type="Int32" />
+    <NavigationProperty Name="Job_title1" Relationship="DBSportStore1Model.FK_AdminUser_Job_title" FromRole="AdminUser" ToRole="Job_title" />
+  </EntityType>
+  <EntityType Name="Job_title">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AdminUsers" Relationship="DBSportStore1Model.FK_AdminUser_Job_title" FromRole="Job_title" ToRole="AdminUser" />
+  </EntityType>
+  <Association Name="FK_AdminUser_Job_title">
+    <End Type="DBSportStore1Model.Job_title" Role="Job_title" Multiplicity="0..1" />
+    <End Type="DBSportStore1Model.AdminUser" Role="AdminUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Job_title">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AdminUser">
+        <PropertyRef Name="Job_title" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

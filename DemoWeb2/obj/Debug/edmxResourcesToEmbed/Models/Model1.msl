@@ -1,16 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="DBSportStore1ModelStoreContainer" CdmEntityContainer="DBSportStore1Entities">
-    <EntitySetMapping Name="AdminUsers">
-      <EntityTypeMapping TypeName="DBSportStore1Model.AdminUser">
-        <MappingFragment StoreEntitySet="AdminUser">
-          <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="NameUser" ColumnName="NameUser" />
-          <ScalarProperty Name="RoleUser" ColumnName="RoleUser" />
-          <ScalarProperty Name="PasswordUser" ColumnName="PasswordUser" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Categories">
       <EntityTypeMapping TypeName="DBSportStore1Model.Category">
         <MappingFragment StoreEntitySet="Category">
@@ -77,6 +67,30 @@
           <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
           <ScalarProperty Name="principal_id" ColumnName="principal_id" />
           <ScalarProperty Name="name" ColumnName="name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AdminUsers">
+      <EntityTypeMapping TypeName="DBSportStore1Model.AdminUser">
+        <MappingFragment StoreEntitySet="AdminUser">
+          <ScalarProperty Name="Job_title" ColumnName="Job_title" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="CMT" ColumnName="CMT" />
+          <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Avatar" ColumnName="Avatar" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="FullName" ColumnName="FullName" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Job_title">
+      <EntityTypeMapping TypeName="DBSportStore1Model.Job_title">
+        <MappingFragment StoreEntitySet="Job_title">
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

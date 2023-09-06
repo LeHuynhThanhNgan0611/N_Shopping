@@ -5,17 +5,23 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using DemoWeb2.Models;
+using PagedList;
 
 namespace DemoWeb.Controllers
 {
     public class CategoriesController : Controller
     {
         DBSportStore1Entities database = new DBSportStore1Entities();
+
         // GET: Categories
-        public ActionResult Index()
+  
+        public ActionResult Index(int? page)
         {
-            var categories = database.Categories.ToList();
-            return View(categories);
+            int pageNumber = (page ?? 1);
+            int pageSize = 10;
+            var dsCate = database.Categories.ToList().OrderBy(n => n.Id).ToPagedList(pageNumber, pageSize);
+            ViewBag.dsCate = dsCate;
+            return View(dsCate);
         }
 
         [HttpGet]
@@ -35,7 +41,7 @@ namespace DemoWeb.Controllers
             }
             catch
             {
-                return Content("LỖI TẠO MỚI CATEGORY");
+                return Content("Tạo không thành công");
             }
         }
         //public ActionResult Details(int id)

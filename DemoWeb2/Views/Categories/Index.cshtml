@@ -1,84 +1,91 @@
-﻿@using DemoWeb2.Models
-@model IEnumerable<DemoWeb2.Models.Category>
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model PagedList.IPagedList<DemoWeb2.Models.Category>
 
 @{
     ViewBag.Title = "Danh sách danh mục";
     ViewBag.headTitle = "Danh sách danh mục";
     Layout = "~/Views/Shared/_admin_Layout.cshtml";
-    AdminUser adminUser = Session["TaiKhoan"] as AdminUser;
+    var dsCate = ViewBag.dsCate;
 }
 
-<p>
-    @Html.ActionLink("Tạo mới một doanh mục", "Create", "Categories", new { @class = "btn btn-add" })
-</p>
-    @*<p>
-        @Html.ActionLink("TẠO MỚI", "Create", null, new
-   {
-       @class = "btn btn-primary"
-   })
-    </p>*@
-    <table class="table">
+<div class="col-sm-2">
+
+    <a class="btn btn-add btn-sm" href="@Url.Action("Create","Categories")">
+        <i class="fas fa-plus"></i>
+        Tạo mới danh mục
+    </a>
+</div>
+
+<table class="table">
+    <thead>
         <tr>
+            <th>
+                Thứ tự
+            </th>
             <th>
                 Mã danh mục
             </th>
             <th>
-                Tên danh mục
+                Danh mục
             </th>
             <th>
-                Thao tác
+                Thao Tác
             </th>
         </tr>
-        @foreach (var item in Model)
-         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IDCate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.NameCate)
-                </td>
-                <td>
+    </thead>
+    @foreach (var item in dsCate)
+    {
+        <tr>
+            <td>@item.Id</td>
+            <td>@item.IDCate</td>
+            <td>@item.NameCate</td>
+            <td>
 
-                    <button class="btn btn-primary btn-sm trash" type="button" title="Xóa" id="delete-btn"
-                            onclick="location.href='@Url.Action("Delete", "Categories",new { id = item.Id })'">
-                        <i class="fas fa-trash-alt"></i>
-                    </button>
-                    <button class="btn btn-primary btn-sm edit" type="button" title="Sửa"
-                            onclick="location.href='@Url.Action("Edit", "Categories",new { id = item.Id })'">
-                        <i class="fas fa-edit"></i>
-                    </button>
-                </td>
-            </tr>
-         }
-    </table>
+                <button class="btn btn-primary btn-sm trash" type="button" title="Xóa" id="delete-btn"
+                        onclick="location.href='@Url.Action("Delete", "Categories",new { id = item.Id })'">
+                    <i class="fas fa-trash-alt"></i>
+                </button>
+                <button class="btn btn-primary btn-sm edit" type="button" title="Sửa"
+                        onclick="location.href='@Url.Action("Edit", "Categories",new { id = item.Id })'">
+                    <i class="fas fa-edit"></i>
+                </button>
+                <button class="btn btn-primary btn-sm info" type="button" title="Sửa"
+                        onclick="location.href='@Url.Action("Detail", "Categories",new { id = item.Id })'">
+                    <i class="fas fa-info-circle"></i>
+                </button>
+            </td>
+        </tr>
+     }
+
+</table>
 
 @* Tạo liên kết các trang *@
 
-@*<div class="MenuTrang pagination">
-    @Html.PagedListPager(Model, page => Url.Action("Index", new { page = page }),
-      new PagedListRenderOptions()
-      {
-          LiElementClasses = new[] { "paginate_button page-item page-link" },
-          UlElementClasses = new[] { "pagination" }
-      })
-    <span>Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)/ @Model.PageCount</span>
-</div>
-<style>
-    .pagination {
-        justify-content: space-between;
-        align-items: center;
-    }
+<div class="MenuTrang pagination">
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page = page }),
+          new PagedListRenderOptions()
+          {
+              LiElementClasses = new[] { "paginate_button page-item page-link" },
+              UlElementClasses = new[] { "pagination" }
+          })
+        <span>Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)/ @Model.PageCount</span>
+    </div>
+    <style>
+        .pagination {
+            justify-content: space-between;
+            align-items: center;
+        }
 
-    .MenuTrang li {
-        display: inline;
-    }
+        .MenuTrang li {
+            display: inline;
+        }
 
-    .active {
-        background-color: #001C40;
-        color: white;
-    }
-</style>*@
+        .active {
+            background-color: #001C40;
+            color: white;
+        }
+    </style>
 
 
 <script>

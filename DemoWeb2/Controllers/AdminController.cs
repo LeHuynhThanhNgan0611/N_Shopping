@@ -26,13 +26,13 @@ namespace DemoWeb2.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (string.IsNullOrEmpty(ad.NameUser))
-                    ModelState.AddModelError(string.Empty, "Tên đăng nhập không được để trống");
-                if (string.IsNullOrEmpty(ad.PasswordUser))
+                if (string.IsNullOrEmpty(ad.Email))
+                    ModelState.AddModelError(string.Empty, "Email không được để trống");
+                if (string.IsNullOrEmpty(ad.Password))
                     ModelState.AddModelError(string.Empty, "Mật khẩu không được để trống");
                 if (ModelState.IsValid)
                 {
-                    var admin = database.AdminUsers.FirstOrDefault(k => k.NameUser == ad.NameUser && k.PasswordUser == ad.PasswordUser);
+                    var admin = database.AdminUsers.FirstOrDefault(k => k.Email == ad.Email && k.Password == ad.Password);
                     if (admin != null)
                     {
                         Session["TaiKhoan"] = admin;
@@ -48,7 +48,7 @@ namespace DemoWeb2.Controllers
         {
             if (Session["TaiKhoan"] == null) //Chưa đăng nhập
                 return RedirectToAction("Login", "Admin");
-            var admin = database.Customers.FirstOrDefault(k => k.NameCus == ad.NameUser && k.PassCus == ad.PasswordUser);
+            var admin = database.Customers.FirstOrDefault(k => k.EmailCus == ad.Email && k.PassCus == ad.Password);
             if (admin != null)
             {
                 Session["TaiKhoan"] = admin;
@@ -59,6 +59,11 @@ namespace DemoWeb2.Controllers
             //ViewBag.TotalNumber = GetTotalNumber();
             //ViewBag.TotalPrice = GetTotalPrice();
             return View(); //Trả về View xác nhận đặt hàng
+        }
+        public ActionResult Logout()
+        {
+            Session["TaiKhoan"] = null;
+            return RedirectToAction("Login", "Admin");
         }
     }
 }

@@ -12,19 +12,18 @@ namespace DemoWeb2.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class AdminUser
+    public partial class Job_title
     {
-        public int Id { get; set; }
-        public string FullName { get; set; }
-        public string Email { get; set; }
-        public string Password { get; set; }
-        public string Avatar { get; set; }
-        public string Address { get; set; }
-        public Nullable<System.DateTime> DateOfBirth { get; set; }
-        public string CMT { get; set; }
-        public string Phone { get; set; }
-        public Nullable<int> Job_title { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Job_title()
+        {
+            this.AdminUsers = new HashSet<AdminUser>();
+        }
     
-        public virtual Job_title Job_title1 { get; set; }
+        public int Id { get; set; }
+        public string Name { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<AdminUser> AdminUsers { get; set; }
     }
 }

@@ -5,7 +5,6 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="908da73c13364f74b67a41643e2e4572" Name="Diagram1" ZoomLevel="86">
-        <EntityTypeShape EntityType="DBSportStore1Model.AdminUser" Width="1.5" PointX="5.75" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="DBSportStore1Model.Category" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
         <EntityTypeShape EntityType="DBSportStore1Model.Customer" Width="1.5" PointX="0.75" PointY="5.25" IsExpanded="true" />
         <EntityTypeShape EntityType="DBSportStore1Model.OrderDetail" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
@@ -16,6 +15,9 @@
         <AssociationConnector Association="DBSportStore1Model.FK__OrderDeta__IDOrd__30F848ED" ManuallyRouted="false" />
         <AssociationConnector Association="DBSportStore1Model.FK__OrderDeta__IDPro__300424B4" ManuallyRouted="false" />
         <EntityTypeShape EntityType="DBSportStore1Model.sysdiagram" Width="1.5" PointX="7.375" PointY="0.75" />
+        <EntityTypeShape EntityType="DBSportStore1Model.AdminUser" Width="1.5" PointX="7.625" PointY="5" />
+        <EntityTypeShape EntityType="DBSportStore1Model.Job_title" Width="1.5" PointX="5.375" PointY="5.75" />
+        <AssociationConnector Association="DBSportStore1Model.FK_AdminUser_Job_title" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

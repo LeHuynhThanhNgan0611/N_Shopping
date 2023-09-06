@@ -2,12 +2,18 @@
 <Schema Namespace="DBSportStore1Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <EntityType Name="AdminUser">
     <Key>
-      <PropertyRef Name="ID" />
+      <PropertyRef Name="Id" />
     </Key>
-    <Property Name="ID" Type="int" Nullable="false" />
-    <Property Name="NameUser" Type="nvarchar(max)" />
-    <Property Name="RoleUser" Type="nvarchar(max)" />
-    <Property Name="PasswordUser" Type="nchar" MaxLength="50" />
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FullName" Type="nvarchar" MaxLength="50" />
+    <Property Name="Email" Type="varchar" MaxLength="50" />
+    <Property Name="Password" Type="varchar" MaxLength="50" />
+    <Property Name="Avatar" Type="nvarchar(max)" />
+    <Property Name="Address" Type="nvarchar" MaxLength="250" />
+    <Property Name="DateOfBirth" Type="date" />
+    <Property Name="CMT" Type="varchar" MaxLength="15" />
+    <Property Name="Phone" Type="varchar" MaxLength="12" />
+    <Property Name="Job_title" Type="int" />
   </EntityType>
   <EntityType Name="Category">
     <Key>
@@ -29,6 +35,13 @@
     <Property Name="GoogleId" Type="nvarchar(max)" />
     <Property Name="FacebookId" Type="nvarchar(max)" />
     <Property Name="Avatar" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="Job_title">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
   </EntityType>
   <EntityType Name="OrderDetail">
     <Key>
@@ -108,6 +121,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_AdminUser_Job_title">
+    <End Role="Job_title" Type="Self.Job_title" Multiplicity="0..1" />
+    <End Role="AdminUser" Type="Self.AdminUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Job_title">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AdminUser">
+        <PropertyRef Name="Job_title" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Pro_Category">
     <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
     <End Role="Products" Type="Self.Products" Multiplicity="*" />
@@ -124,6 +149,7 @@
     <EntitySet Name="AdminUser" EntityType="Self.AdminUser" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Job_title" EntityType="Self.Job_title" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="OrderDetail" EntityType="Self.OrderDetail" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="OrderPro" EntityType="Self.OrderPro" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
@@ -139,6 +165,10 @@
     <AssociationSet Name="FK__OrderPro__IDCus__2D27B809" Association="Self.FK__OrderPro__IDCus__2D27B809">
       <End Role="Customer" EntitySet="Customer" />
       <End Role="OrderPro" EntitySet="OrderPro" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AdminUser_Job_title" Association="Self.FK_AdminUser_Job_title">
+      <End Role="Job_title" EntitySet="Job_title" />
+      <End Role="AdminUser" EntitySet="AdminUser" />
     </AssociationSet>
     <AssociationSet Name="FK_Pro_Category" Association="Self.FK_Pro_Category">
       <End Role="Category" EntitySet="Category" />

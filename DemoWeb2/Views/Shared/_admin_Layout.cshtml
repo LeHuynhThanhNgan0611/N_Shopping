@@ -21,14 +21,14 @@
     @Scripts.Render("~/bundles/adminjs")
 </head>
 <body onload="time()" class="app sidebar-mini rtl">
-    @*@{ if (Session["NV"] == null)
+    @{ if (Session["TaiKhoan"] == null)
                         {
-                            Response.Redirect("~/Admin/Admin/Login");
+                            Response.Redirect("~/Admin/Login");
                         }; }
         @using DemoWeb2.Models;
         @{ DBSportStore1Entities _db = new DBSportStore1Entities();
-                        Staff session = (Staff)Session["NV"];
-                        Staff nv = _db.Staffs.Find(session.Id); }*@
+                        AdminUser session = (AdminUser)Session["TaiKhoan"];
+                        AdminUser nv = _db.AdminUsers.Find(session.Id); }
     <!-- Navbar-->
     <header class="app-header">
         <!-- Sidebar toggle button--><a class="app-sidebar__toggle" href="#" data-toggle="sidebar"
@@ -49,12 +49,12 @@
         <div class="app-sidebar__user">
             @*<img class="app-sidebar__user-avatar" src="~/Hinh/NhanVien/@Session["Avatar"].ToString()" width="50"
                 alt="User Image">*@
-            @*<div>
-                            @if (Session["NV"] != null)
-                            {
-                <p class="app-sidebar__user-name"><b>@nv.FullName</b></p>
-                                <p class="app-sidebar__user-designation">@nv.Job_title1.Name</p>}
-                        </div>*@
+            <div>
+                @if (Session["TaiKhoan"] != null)
+                {
+                <p class="app-sidebar__user-name"><b>@(nv != null ? nv.FullName : "")</b></p>
+                <p class="app-sidebar__user-designation">@((nv != null && nv.Job_title1 != null) ? nv.Job_title1.Name : "")</p>}
+            </div>
         </div>
         <hr>
         <ul class="app-menu">
@@ -84,7 +84,7 @@
                 </a>
             </li>
             <li>
-                <a class="app-menu__item " href="@Url.Action("Index","Staff")">
+                <a class="app-menu__item " href="@Url.Action("Index","AdminUsers")">
                     <i class='app-menu__icon bx bx-id-card'></i> <span class="app-menu__label">Quản lý nhân viên</span>
                 </a>
             </li>

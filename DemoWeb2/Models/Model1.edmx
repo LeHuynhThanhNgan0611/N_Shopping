@@ -7,12 +7,18 @@
     <Schema Namespace="DBSportStore1Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AdminUser">
           <Key>
-            <PropertyRef Name="ID" />
+            <PropertyRef Name="Id" />
           </Key>
-          <Property Name="ID" Type="int" Nullable="false" />
-          <Property Name="NameUser" Type="nvarchar(max)" />
-          <Property Name="RoleUser" Type="nvarchar(max)" />
-          <Property Name="PasswordUser" Type="nchar" MaxLength="50" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FullName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Email" Type="varchar" MaxLength="50" />
+          <Property Name="Password" Type="varchar" MaxLength="50" />
+          <Property Name="Avatar" Type="nvarchar(max)" />
+          <Property Name="Address" Type="nvarchar" MaxLength="250" />
+          <Property Name="DateOfBirth" Type="date" />
+          <Property Name="CMT" Type="varchar" MaxLength="15" />
+          <Property Name="Phone" Type="varchar" MaxLength="12" />
+          <Property Name="Job_title" Type="int" />
         </EntityType>
         <EntityType Name="Category">
           <Key>
@@ -34,6 +40,13 @@
           <Property Name="GoogleId" Type="nvarchar(max)" />
           <Property Name="FacebookId" Type="nvarchar(max)" />
           <Property Name="Avatar" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Job_title">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="OrderDetail">
           <Key>
@@ -113,6 +126,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_AdminUser_Job_title">
+          <End Role="Job_title" Type="Self.Job_title" Multiplicity="0..1" />
+          <End Role="AdminUser" Type="Self.AdminUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Job_title">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AdminUser">
+              <PropertyRef Name="Job_title" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Pro_Category">
           <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
           <End Role="Products" Type="Self.Products" Multiplicity="*" />
@@ -129,6 +154,7 @@
           <EntitySet Name="AdminUser" EntityType="Self.AdminUser" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Job_title" EntityType="Self.Job_title" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OrderDetail" EntityType="Self.OrderDetail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OrderPro" EntityType="Self.OrderPro" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
@@ -145,6 +171,10 @@
             <End Role="Customer" EntitySet="Customer" />
             <End Role="OrderPro" EntitySet="OrderPro" />
           </AssociationSet>
+          <AssociationSet Name="FK_AdminUser_Job_title" Association="Self.FK_AdminUser_Job_title">
+            <End Role="Job_title" EntitySet="Job_title" />
+            <End Role="AdminUser" EntitySet="AdminUser" />
+          </AssociationSet>
           <AssociationSet Name="FK_Pro_Category" Association="Self.FK_Pro_Category">
             <End Role="Category" EntitySet="Category" />
             <End Role="Products" EntitySet="Products" />
@@ -154,15 +184,6 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DBSportStore1Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="AdminUser">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" />
-          <Property Name="NameUser" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="RoleUser" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="PasswordUser" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
-        </EntityType>
         <EntityType Name="Category">
           <Key>
             <PropertyRef Name="IDCate" />
@@ -273,7 +294,6 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="DBSportStore1Entities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="AdminUsers" EntityType="Self.AdminUser" />
           <EntitySet Name="Categories" EntityType="Self.Category" />
           <EntitySet Name="Customers" EntityType="Self.Customer" />
           <EntitySet Name="OrderDetails" EntityType="Self.OrderDetail" />
@@ -296,6 +316,12 @@
             <End Role="OrderDetail" EntitySet="OrderDetails" />
           </AssociationSet>
           <EntitySet Name="sysdiagrams" EntityType="DBSportStore1Model.sysdiagram" />
+          <EntitySet Name="AdminUsers" EntityType="DBSportStore1Model.AdminUser" />
+          <EntitySet Name="Job_title" EntityType="DBSportStore1Model.Job_title" />
+          <AssociationSet Name="FK_AdminUser_Job_title" Association="DBSportStore1Model.FK_AdminUser_Job_title">
+            <End Role="Job_title" EntitySet="Job_title" />
+            <End Role="AdminUser" EntitySet="AdminUsers" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="sysdiagram">
           <Key>
@@ -307,22 +333,48 @@
           <Property Name="version" Type="Int32" />
           <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
+        <EntityType Name="AdminUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FullName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Avatar" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="DateOfBirth" Type="DateTime" Precision="0" />
+          <Property Name="CMT" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Phone" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="Job_title" Type="Int32" />
+          <NavigationProperty Name="Job_title1" Relationship="DBSportStore1Model.FK_AdminUser_Job_title" FromRole="AdminUser" ToRole="Job_title" />
+        </EntityType>
+        <EntityType Name="Job_title">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AdminUsers" Relationship="DBSportStore1Model.FK_AdminUser_Job_title" FromRole="Job_title" ToRole="AdminUser" />
+        </EntityType>
+        <Association Name="FK_AdminUser_Job_title">
+          <End Type="DBSportStore1Model.Job_title" Role="Job_title" Multiplicity="0..1" />
+          <End Type="DBSportStore1Model.AdminUser" Role="AdminUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Job_title">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AdminUser">
+              <PropertyRef Name="Job_title" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="DBSportStore1ModelStoreContainer" CdmEntityContainer="DBSportStore1Entities">
-          <EntitySetMapping Name="AdminUsers">
-            <EntityTypeMapping TypeName="DBSportStore1Model.AdminUser">
-              <MappingFragment StoreEntitySet="AdminUser">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="NameUser" ColumnName="NameUser" />
-                <ScalarProperty Name="RoleUser" ColumnName="RoleUser" />
-                <ScalarProperty Name="PasswordUser" ColumnName="PasswordUser" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Categories">
             <EntityTypeMapping TypeName="DBSportStore1Model.Category">
               <MappingFragment StoreEntitySet="Category">
@@ -389,6 +441,30 @@
                 <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
                 <ScalarProperty Name="principal_id" ColumnName="principal_id" />
                 <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AdminUsers">
+            <EntityTypeMapping TypeName="DBSportStore1Model.AdminUser">
+              <MappingFragment StoreEntitySet="AdminUser">
+                <ScalarProperty Name="Job_title" ColumnName="Job_title" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="CMT" ColumnName="CMT" />
+                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Avatar" ColumnName="Avatar" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Job_title">
+            <EntityTypeMapping TypeName="DBSportStore1Model.Job_title">
+              <MappingFragment StoreEntitySet="Job_title">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

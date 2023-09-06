@@ -1,0 +1,64 @@
+﻿@model IEnumerable<DemoWeb2.Models.AdminUser>
+
+@{
+    ViewBag.Title = "Quản lí nhân viên";
+    ViewBag.headTitle = "Danh sách nhân viên";
+    Layout = "~/Views/Shared/_admin_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-sm-2">
+        <a class="btn btn-info" href="@Url.Action("Create","AdminUsers")">
+            <i class="fas fa-plus"></i>
+            Thêm mới nhân viên
+        </a>
+    </div>
+    <div class="col-md-12">
+        <div>
+            <label for="txtSearch">
+                <input type="search" id="txtSearch" placeholder="Tìm kiếm..." class="form-control form-control-sm" />
+            </label>
+        </div>
+    </div>
+</div>
+
+<div class="table-responsive">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Họ và tên</th>
+                <th>Địa chỉ</th>
+                <th>Ngày sinh</th>
+                <th>Số điện thoại</th>
+                <th>CMT</th>
+                <th>Chức năng</th>
+            </tr>
+        </thead>
+        <tbody id="show_data">
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.FullName)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Address)</td>
+                    <td>@Html.DisplayFor(modelItem => item.DateOfBirth)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Phone)</td>
+                    <td>@Html.DisplayFor(modelItem => item.CMT)</td>
+                    <td>
+                        <button class="btn btn-primary btn-sm trash" type="button" title="Xóa" id="delete-btn"
+                                onclick="location.href='@Url.Action("Delete", "AdminUsers",new { id = item.Id })'">
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
+                        <button class="btn btn-primary btn-sm edit" type="button" title="Sửa"
+                                onclick="location.href='@Url.Action("Edit", "AdminUsers",new { id = item.Id })'">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="btn btn-primary btn-sm info" type="button" title="Sửa"
+                                onclick="location.href='@Url.Action("Details", "AdminUsers",new { id = item.Id })'">
+                            <i class="fas fa-info-circle"></i>
+                        </button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

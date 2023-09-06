@@ -1,8 +1,9 @@
 ﻿@model DemoWeb2.Models.Product
 
 @{
-    ViewBag.Title = "Details";
-    Layout = "~/Views/Shared/_Layout1.cshtml";
+    ViewBag.Title = "Chi tiết";
+    ViewBag.headTitle = "Chi tiết sản phẩm";
+    Layout = "~/Views/Shared/_admin_Layout.cshtml";
 }
 <style>
     th, td {
@@ -30,7 +31,7 @@
                     </tr>
                     <tr>
                         <th class="table-success">Giá</th>
-                        <td>@Html.DisplayFor(model => model.Price)</td>
+                        <td>@string.Format("{0:#,0}", Model.Price) đ</td>
                     </tr>
                     <tr>
                         <th class="table-success">Nhóm sản phẩm</th>

@@ -9,13 +9,11 @@
 <div class="wrapper">
     <h1>Đăng nhập</h1>
     <div class="social-icons">
-        <a href="https://accounts.google.com/o/oauth2/auth?client_id=1098593658235-tt8iff6m9tg8l2cfdngofo6j3phtc5dn.apps.googleusercontent.com&redirect_uri=https://localhost:59750/Login/GoogleLoginCallback&scope=https://www.googleapis.com/auth/userinfo.profile&response_type=code&state=asdafwswdwefwsdg">
+        <a href="@Url.Action("Login", "Login")">
             <i class="fa-brands fa-google"></i>
         </a>
-        <a href=""><i class="fa-brands fa-facebook-f"></i></a>
+        <a href="@Url.Action("LoginFacebook", "Login")"><i class="fa-brands fa-facebook-f"></i></a>
         <a href=""><i class="fa-brands fa-instagram"></i></a>
-        @*<a target="_blank" href="@ViewBag.response"><i class="fa-brands fa-google"></i></a>*@
-        @*<a href=""><i class="fa-brands fa-google"></i></a>*@
     </div>
     @using (Html.BeginForm("Login", "Users"))
     {

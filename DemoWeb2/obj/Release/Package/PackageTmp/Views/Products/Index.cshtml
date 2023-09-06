@@ -1,100 +1,128 @@
-﻿@*@model IEnumerable<DemoWeb2.Models.Product>*@
-@using PagedList;
+﻿@using PagedList;
 @using PagedList.Mvc;
 @model PagedList.IPagedList<DemoWeb2.Models.Product>
 
 @{
-    ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_Layout1.cshtml";
+    ViewBag.Title = "Trang sản phẩm";
+    ViewBag.headTitle = "Danh sách sản phẩm";
+    Layout = "~/Views/Shared/_admin_Layout.cshtml";
 }
 
-<div style="margin: 10px auto; width: 90%;">
-    <h2 style="text-align: center">THÔNG TIN PRODUCTS</h2>
-    <p>
-        @Html.ActionLink("TẠO MỚI", "Create", null, new
-        {
-            @class = "btn btn-primary"
-        })
-    </p>
-    @using (Html.BeginForm("Index", "Products", FormMethod.Get))
-    {
-        <div class="row">
-            <div class="col-md-8 offset-md-2">
-                <form action="simple-results.html">
-                    <div class="input-group input-group-lg">
-                        @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-control ", placeholder = "Nhập tên sản phẩm", value = "Lorem ipsum" })
-                        @*<input type="search" class="form-control form-control-lg" placeholder="Type your keywords here" value="Lorem ipsum">*@
-                        <div class="input-group-append">
-                            <button type="submit" class="btn btn-default">
-                                <i class="fa fa-search"></i>
-                            </button>
-                        </div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="tile">
+            <div class="tile-body">
+                <div class="row element-button">
+                    <div class="col-sm-2">
+
+                        <a class="btn btn-add btn-sm" href="@Url.Action("Create","Products")">
+                            <i class="fas fa-plus"></i>
+                            Tạo mới sản phẩm
+                        </a>
                     </div>
-                </form>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 col-md-6">
+
+                    </div>
+                    <div class="col-sm-12 col-md-6">
+                        @using (Html.BeginForm("Index", "Products", FormMethod.Get, new { @class = "d-flex justify-content-end" }))
+                        {
+                            <label class="col-form-label">
+                                Tìm kiếm:
+                                <div class="input-group input-group-lg">
+                                    @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-control ", placeholder = "Nhập tên sản phẩm", value = "Lorem ipsum" })
+                                    @*<div class="input-group-">
+                                        <button type="submit" class="btn btn-default">
+                                            <i class="fa fa-search"></i>
+                                        </button>
+                                    </div>*@
+                                </div>
+                            </label>
+                        }
+                    </div>
+                </div>
+                <table class="table table-hover table-bordered" id="sampleTable">
+                    <thead>
+                        <tr>
+                            <th>Mã sản phẩm</th>
+                            <th>Tên sản phẩm</th>
+                            <th>Ảnh</th>
+                            <th>Giá tiền</th>
+                            <th>Danh mục</th>
+                            <th>Chức năng</th>
+                        </tr>
+                    </thead>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td class="align-middle">
+                                @Html.DisplayFor(modelItem => item.ProductID)
+                            </td>
+                            <td class="align-middle">
+                                @Html.DisplayFor(modelItem => item.NamePro)
+                            </td>
+                            <td>
+                                <img src="~/Images/@item.ImagePro" style="width:100px; height:100px" />
+                            </td>
+                            @*<td class="align-middle">
+                        @Html.Raw(item.DecriptionPro.Substring(0, 40))
+                        ...
+                    </td>*@
+                        <td class="align-middle">
+                            @string.Format("{0:#,0}", item.Price) đ
+                        </td>
+                            <td class="align-middle">
+                                @Html.DisplayFor(modelItem =>
+                               item.Category1.NameCate)
+                            </td>
+                            <td>
+
+                                <button class="btn btn-primary btn-sm trash" type="button" title="Xóa" id="delete-btn"
+                                        onclick="location.href='@Url.Action("Delete", "Products",new { id = item.ProductID })'">
+                                    <i class="fas fa-trash-alt"></i>
+                                </button>
+                                <button class="btn btn-primary btn-sm edit" type="button" title="Sửa"
+                                        onclick="location.href='@Url.Action("Edit", "Products",new { id = item.ProductID })'">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="btn btn-primary btn-sm info" type="button" title="Sửa"
+                                        onclick="location.href='@Url.Action("Details", "Products",new { id = item.ProductID })'">
+                                    <i class="fas fa-info-circle"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    }
+                </table>
+                @*Trang @(Model.PageCount<Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page, currentFilter = ViewBag.CurrentFilter }))*@
+                @* Tạo liên kết các trang *@
+
+                <div class="MenuTrang pagination">
+                    @Html.PagedListPager(Model, page => Url.Action("Index", new { page = page }),
+                      new PagedListRenderOptions()
+                      {
+                          LiElementClasses = new[] { "paginate_button page-item page-link" },
+                          UlElementClasses = new[] { "pagination" }
+                      })
+                    <span>Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)/ @Model.PageCount</span>
+                </div>
+                <style>
+                    .pagination {
+                        justify-content: space-between;
+                        align-items: center;
+                    }
+
+                    .MenuTrang li {
+                        display: inline;
+                    }
+
+                    .active {
+                        background-color: #001C40;
+                        color: white;
+                    }
+                </style>
             </div>
         </div>
-    }
-    <table class="table" style="margin-top: 20px">
-        <tr>
-            <th>
-                TÊN SẢN PHẨM
-            </th>
-            <th>
-                MÔ TẢ
-            </th>
-            <th>
-                GIÁ
-            </th>
-            <th>
-                HÌNH
-            </th>
-            <th>
-                DANH MỤC
-            </th>
-            <th></th>
-        </tr>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td class="align-middle">
-                    @Html.DisplayFor(modelItem => item.NamePro)
-                </td>
-                <td class="align-middle">
-                    @Html.Raw(item.DecriptionPro.Substring(0, 40))
-                    ...
-                </td>
-                <td class="align-middle">
-                    @Html.DisplayFor(modelItem => item.Price)
-                </td>
-                <td>
-                    @*@Html.DisplayFor(modelItem => item.ImagePro)*@
-                    <img src="~/Images/@item.ImagePro" style="width:85px; height:85px" />
-                </td>
-                <td class="align-middle">
-                    @Html.DisplayFor(modelItem =>
-                   item.Category1.NameCate)
-                </td>
-                <td class="align-middle">
-                    @Html.ActionLink("Sửa", "Edit", new
-                    {
-                        id =
-                   item.ProductID
-                    }, new { @class = "btn btn-success" })
-                    @Html.ActionLink("Chi tiết", "Details", new
-                    {
-                        id =
-                   item.ProductID
-                    }, new { @class = "btn btn-primary" })
-                    @Html.ActionLink("Xóa", "Delete", new
-                    {
-                        id =
-                   item.ProductID
-                    }, new { @class = "btn btn-danger" })
-                </td>
-            </tr>
-        }
-    </table>
-    Trang @(Model.PageCount<Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
-    @Html.PagedListPager(Model, page => Url.Action("Index", new { page, currentFilter = ViewBag.CurrentFilter }))
+    </div>
 </div>
-

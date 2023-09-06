@@ -196,3 +196,10 @@ D:\ĐỒ ÁN PHẦM MỀM\DemoWeb2\DemoWeb2\bin\Microsoft.AspNetCore.Mvc.Abstrac
 D:\ĐỒ ÁN PHẦM MỀM\DemoWeb2\DemoWeb2\bin\Microsoft.AspNetCore.Routing.Abstractions.dll
 D:\ĐỒ ÁN PHẦM MỀM\DemoWeb2\DemoWeb2\bin\Microsoft.AspNetCore.Mvc.Abstractions.xml
 D:\ĐỒ ÁN PHẦM MỀM\DemoWeb2\DemoWeb2\bin\Microsoft.AspNetCore.Routing.Abstractions.xml
+D:\ĐỒ ÁN PHẦM MỀM\DemoWeb2\DemoWeb2\bin\DocumentFormat.OpenXml.dll
+D:\ĐỒ ÁN PHẦM MỀM\DemoWeb2\DemoWeb2\bin\Microsoft.Owin.Security.Facebook.dll
+D:\ĐỒ ÁN PHẦM MỀM\DemoWeb2\DemoWeb2\bin\Xamarin.Essentials.dll
+D:\ĐỒ ÁN PHẦM MỀM\DemoWeb2\DemoWeb2\bin\DocumentFormat.OpenXml.xml
+D:\ĐỒ ÁN PHẦM MỀM\DemoWeb2\DemoWeb2\bin\Microsoft.Owin.Security.Facebook.xml
+D:\ĐỒ ÁN PHẦM MỀM\DemoWeb2\DemoWeb2\bin\Xamarin.Essentials.pdb
+D:\ĐỒ ÁN PHẦM MỀM\DemoWeb2\DemoWeb2\bin\Xamarin.Essentials.xml

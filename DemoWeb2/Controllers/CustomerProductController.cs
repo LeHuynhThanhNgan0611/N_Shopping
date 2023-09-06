@@ -96,24 +96,24 @@ namespace DemoWeb2.Controllers
             return View(lstProduct.ToPagedList(pageNumber, pageSize));
         }
 
-        public ActionResult ShareOnFacebook()
-        {
-            // Tạo đường dẫn của trang cần chia sẻ
-            var url = "http://localhost:59750/CustomerProduct/Details/";
+        //public ActionResult ShareOnFacebook()
+        //{
+        //    // Tạo đường dẫn của trang cần chia sẻ
+        //    var url = "http://localhost:59750/CustomerProduct/Details/";
 
-            // Khởi tạo đối tượng FacebookClient với Access Token của ứng dụng
-            var fb = new FacebookClient("{access-token}");
+        //    // Khởi tạo đối tượng FacebookClient với Access Token của ứng dụng
+        //    var fb = new FacebookClient("{access-token}");
 
-            // Tạo đối tượng parameters để truyền vào phương thức FacebookClient.Post()
-            var parameters = new Dictionary<string, object>();
-            parameters["link"] = url;
+        //    // Tạo đối tượng parameters để truyền vào phương thức FacebookClient.Post()
+        //    var parameters = new Dictionary<string, object>();
+        //    parameters["link"] = url;
 
-            // Thực hiện chia sẻ nội dung lên Facebook
-            dynamic result = fb.Post("me/feed", parameters);
+        //    // Thực hiện chia sẻ nội dung lên Facebook
+        //    dynamic result = fb.Post("me/feed", parameters);
 
-            // Trả về view báo hiệu chia sẻ thành công
-            return View();
-        }
+        //    // Trả về view báo hiệu chia sẻ thành công
+        //    return View();
+        //}
 
     }
 }

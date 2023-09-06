@@ -98,26 +98,28 @@
                     <script>
                         window.fbAsyncInit = function () {
                             FB.init({
-                                appId: '758104562691593',
+                                appId: '1756001991506584',
                                 xfbml: true,
-                                version: 'v12.0'
+                                version: 'v17.0'
                             });
                         };
 
                         (function (d, s, id) {
-                            var js, fjs = d.getElementsByTagName(s)[0];
-                            if (d.getElementById(id)) { return; }
-                            js = d.createElement(s); js.id = id;
-                            js.src = "https://connect.facebook.net/en_US/sdk.js";
-                            fjs.parentNode.insertBefore(js, fjs);
-                        }(document, 'script', 'facebook-jssdk'));
+                                        var js, fjs = d.getElementsByTagName(s)[0];
+                                        if (d.getElementById(id)) { return; }
+                                        js = d.createElement(s); js.id = id;
+                                        js.src = "https://connect.facebook.net/en_US/sdk.js";
+                                        fjs.parentNode.insertBefore(js, fjs);
+                                    }(document, 'script', 'facebook-jssdk'));
 
                         function shareOnFacebook() {
+                            var productId = @Model.ProductID;
+                            var shareUrl = 'http://ngan061102-001-site1.btempurl.com/CustomerProduct/Details/' + (productId);
                             FB.ui({
-                                method: 'share',
-                                href: 'http://localhost:59750/CustomerProduct/Details',
+                               method: 'share',
+                               href: shareUrl,
                             }, function (response) {
-                                console.log(response);
+                                  console.log(response);
                             });
                         }
 
@@ -130,9 +132,6 @@
                     </a>
                     <a class="text-dark px-2" href="https://www.linkedin.com/in/ngan-le-009379255/">
                         <i class="fab fa-linkedin-in"></i>
-                    </a>
-                    <a class="text-dark px-2" href="">
-                        <i class="fab fa-google"></i>
                     </a>
                 </div>
             </div>

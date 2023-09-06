@@ -2,32 +2,35 @@
 @model IEnumerable<DemoWeb2.Models.Category>
 
 @{
-    ViewBag.Title = "Categories";
-    Layout = "~/Views/Shared/_Layout1.cshtml";
+    ViewBag.Title = "Danh sách danh mục";
+    ViewBag.headTitle = "Danh sách danh mục";
+    Layout = "~/Views/Shared/_admin_Layout.cshtml";
     AdminUser adminUser = Session["TaiKhoan"] as AdminUser;
 }
-<div style="margin: 10px auto; width: 70%;">
-    <h2 style="text-align: center">THÔNG TIN CATEGORIES</h2>
-    <p>
+
+<p>
+    @Html.ActionLink("Tạo mới một doanh mục", "Create", "Categories", new { @class = "btn btn-add" })
+</p>
+    @*<p>
         @Html.ActionLink("TẠO MỚI", "Create", null, new
    {
        @class = "btn btn-primary"
    })
-    </p>
+    </p>*@
     <table class="table">
         <tr>
             <th>
-                MÃ CATEGORY
+                Mã danh mục
             </th>
             <th>
-                TÊN CATEGORY
+                Tên danh mục
             </th>
             <th>
-                
+                Thao tác
             </th>
         </tr>
         @foreach (var item in Model)
-        {
+         {
             <tr>
                 <td>
                     @Html.DisplayFor(modelItem => item.IDCate)
@@ -36,18 +39,59 @@
                     @Html.DisplayFor(modelItem => item.NameCate)
                 </td>
                 <td>
-                    @Html.ActionLink("Sửa", "Edit", new { id = item.Id }, new
-                    {
-                   @class = "btn btn-success"
-                    }) 
-                    @Html.ActionLink("Chi tiết", "Details", new { id = item.Id },
-                   new { @class = "btn btn-primary" }) 
-                    @Html.ActionLink("Xóa", "Delete", new { id = item.Id }, new
-                    {
-                   @class = "btn btn-danger"
-                    })
+
+                    <button class="btn btn-primary btn-sm trash" type="button" title="Xóa" id="delete-btn"
+                            onclick="location.href='@Url.Action("Delete", "Categories",new { id = item.Id })'">
+                        <i class="fas fa-trash-alt"></i>
+                    </button>
+                    <button class="btn btn-primary btn-sm edit" type="button" title="Sửa"
+                            onclick="location.href='@Url.Action("Edit", "Categories",new { id = item.Id })'">
+                        <i class="fas fa-edit"></i>
+                    </button>
                 </td>
             </tr>
-        }
+         }
     </table>
+
+@* Tạo liên kết các trang *@
+
+@*<div class="MenuTrang pagination">
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page = page }),
+      new PagedListRenderOptions()
+      {
+          LiElementClasses = new[] { "paginate_button page-item page-link" },
+          UlElementClasses = new[] { "pagination" }
+      })
+    <span>Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)/ @Model.PageCount</span>
 </div>
+<style>
+    .pagination {
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .MenuTrang li {
+        display: inline;
+    }
+
+    .active {
+        background-color: #001C40;
+        color: white;
+    }
+</style>*@
+
+
+<script>
+    $('.trash').click(function (e) {
+        var a_href = $(this).attr('href'); /* Lấy giá trị của thuộc tính href */
+        e.preventDefault(); /* Không thực hiện action mặc định */
+        $.ajax({ /* Gửi request lên server */
+            url: a_href, /* Nội dung trong Delete.cshtml cụ thể là deleteModal div được server trả về */
+            type: 'GET',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) { /* Sau khi nhận được giá */
+                $('.body-content').prepend(data); /* body-content div (định nghĩa trong _Layout.cshtml) sẽ thêm deleteModal div vào dưới cùng */
+                $('#deleteModal').modal('show'); /* Hiển thị deleteModal div dưới kiểu modal */
+            }
+        });
+    });</script>

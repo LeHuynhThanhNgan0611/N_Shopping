@@ -27,6 +27,8 @@
     <Property Name="EmailCus" Type="nvarchar(max)" />
     <Property Name="PassCus" Type="nchar" MaxLength="50" Nullable="false" />
     <Property Name="GoogleId" Type="nvarchar(max)" />
+    <Property Name="FacebookId" Type="nvarchar(max)" />
+    <Property Name="Avatar" Type="nvarchar(max)" />
   </EntityType>
   <EntityType Name="OrderDetail">
     <Key>
@@ -57,6 +59,8 @@
     <Property Name="Category" Type="nchar" MaxLength="20" />
     <Property Name="Price" Type="decimal" Precision="18" Scale="2" />
     <Property Name="ImagePro" Type="nvarchar(max)" />
+    <Property Name="Sold" Type="int" />
+    <Property Name="Sale" Type="int" />
   </EntityType>
   <EntityType Name="sysdiagrams">
     <Key>

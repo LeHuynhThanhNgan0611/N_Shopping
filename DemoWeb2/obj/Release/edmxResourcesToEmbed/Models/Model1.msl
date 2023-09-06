@@ -23,6 +23,8 @@
     <EntitySetMapping Name="Customers">
       <EntityTypeMapping TypeName="DBSportStore1Model.Customer">
         <MappingFragment StoreEntitySet="Customer">
+          <ScalarProperty Name="Avatar" ColumnName="Avatar" />
+          <ScalarProperty Name="FacebookId" ColumnName="FacebookId" />
           <ScalarProperty Name="GoogleId" ColumnName="GoogleId" />
           <ScalarProperty Name="PassCus" ColumnName="PassCus" />
           <ScalarProperty Name="IDCus" ColumnName="IDCus" />
@@ -56,6 +58,8 @@
     <EntitySetMapping Name="Products">
       <EntityTypeMapping TypeName="DBSportStore1Model.Product">
         <MappingFragment StoreEntitySet="Products">
+          <ScalarProperty Name="Sale" ColumnName="Sale" />
+          <ScalarProperty Name="Sold" ColumnName="Sold" />
           <ScalarProperty Name="ProductID" ColumnName="ProductID" />
           <ScalarProperty Name="NamePro" ColumnName="NamePro" />
           <ScalarProperty Name="DecriptionPro" ColumnName="DecriptionPro" />

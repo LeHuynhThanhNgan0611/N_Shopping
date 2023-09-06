@@ -1,0 +1,20 @@
+﻿@model DemoWeb2.Models.Customer
+
+@{
+    ViewBag.Title = "GoogleLoginCallback";
+    Layout = "~/Views/Shared/_LayoutDetail.cshtml";
+}
+
+
+
+@if (Model != null)
+{
+    <h2>Thông tin người dùng đã đăng nhập</h2>
+    <p>Tên: @Model.NameCus</p>
+    <p>Email: @Model.EmailCus</p>
+    <p>Google ID: @Model.PassCus</p>
+}
+else
+{
+    <p>Đăng nhập không thành công</p>
+}

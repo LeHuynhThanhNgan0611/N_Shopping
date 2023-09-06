@@ -1,0 +1,21 @@
+﻿@model IEnumerable<DemoWeb2.Models.Category>
+@*<div>
+        <ul class="list-group">
+            @foreach (var item in Model)
+            {
+                @Html.ActionLink(item.NameCate, "GetProductsByCateId","CustomerProduct", new { id = item.NameCate }, new { @class = "list-group-item" })
+            }
+        </ul>
+    </div>*@
+
+<nav class="collapse show navbar navbar-vertical navbar-light align-items-start p-0 border border-top-0 border-bottom-0" id="navbar-vertical">
+        <div class="navbar-nav w-100 overflow-hidden" style="height: auto">
+            <a href="" class="nav-item nav-link">
+                @foreach (var item in Model)
+                {
+                    @Html.ActionLink(item.NameCate, "GetProductsByCateId", "CustomerProduct", new { id = item.Id }, new { @class = "list-group-item" })
+                }
+            </a>
+        </div>
+    </nav>
+

@@ -1,4 +1,6 @@
-﻿@model IEnumerable<DemoWeb2.Models.AdminUser>
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model PagedList.IPagedList<DemoWeb2.Models.AdminUser>
 
 @{
     ViewBag.Title = "Quản lí nhân viên";
@@ -14,11 +16,19 @@
         </a>
     </div>
     <div class="col-md-12">
-        <div>
-            <label for="txtSearch">
-                <input type="search" id="txtSearch" placeholder="Tìm kiếm..." class="form-control form-control-sm" />
+        @using (Html.BeginForm("Index", "AdminUsers", FormMethod.Get))
+        {
+            <label class="col-form-label">
+                <div class="input-group input-group-sm">
+                    @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-control ", placeholder = "Tìm kiếm", value = "Lorem ipsum" })
+                </div>
             </label>
-        </div>
+        }
+        @*<div>
+                <label for="txtSearch">
+                    <input type="search" id="txtSearch" placeholder="Tìm kiếm..." class="form-control form-control-sm" />
+                </label>
+            </div>*@
     </div>
 </div>
 
@@ -26,11 +36,12 @@
     <table class="table table-bordered">
         <thead>
             <tr>
+                <th>ID</th>
                 <th>Họ và tên</th>
                 <th>Địa chỉ</th>
                 <th>Ngày sinh</th>
                 <th>Số điện thoại</th>
-                <th>CMT</th>
+                <th>Số định danh</th>
                 <th>Chức năng</th>
             </tr>
         </thead>
@@ -38,9 +49,26 @@
             @foreach (var item in Model)
             {
                 <tr>
+                    <td>@Html.DisplayFor(modelItem => item.Id)</td>
                     <td>@Html.DisplayFor(modelItem => item.FullName)</td>
-                    <td>@Html.DisplayFor(modelItem => item.Address)</td>
-                    <td>@Html.DisplayFor(modelItem => item.DateOfBirth)</td>
+                    <td>
+                        @*@Html.Raw(item.Address.Substring(0, 30))...*@
+                        @if (item.Address != null)
+                        {
+                            @Html.Raw(item.Address.Substring(0, Math.Min(40, item.Address.Length)))
+                        }
+                        else
+                        {
+                            <span>Chưa có địa chỉ</span>
+                        }
+                        ...
+                    </td>
+                    <td>
+                        @if (item.DateOfBirth.HasValue)
+                        {
+                            @item.DateOfBirth.Value.ToShortDateString()
+                        }
+                    </td>
                     <td>@Html.DisplayFor(modelItem => item.Phone)</td>
                     <td>@Html.DisplayFor(modelItem => item.CMT)</td>
                     <td>
@@ -61,4 +89,30 @@
             }
         </tbody>
     </table>
+
+    <div class="MenuTrang pagination">
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page = page }),
+          new PagedListRenderOptions()
+          {
+              LiElementClasses = new[] { "paginate_button page-item page-link" },
+              UlElementClasses = new[] { "pagination" }
+          })
+        <span>Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)/ @Model.PageCount</span>
+    </div>
+    <style>
+        .pagination {
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .MenuTrang li {
+            display: inline;
+        }
+
+        .active {
+            background-color: #001C40;
+            color: white;
+        }
+    </style>
 </div>
+

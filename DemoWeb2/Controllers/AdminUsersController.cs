@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using DemoWeb2.Models;
+using PagedList;
 
 namespace DemoWeb2.Controllers
 {
@@ -15,10 +16,37 @@ namespace DemoWeb2.Controllers
         private DBSportStore1Entities db = new DBSportStore1Entities();
 
         // GET: AdminUsers
-        public ActionResult Index()
+        //public ActionResult Index()
+        //{
+        //    var adminUsers = db.AdminUsers.Include(a => a.Job_title1);
+        //    return View(adminUsers.ToList());
+        //}
+        public ActionResult Index(string currentFilter, string SearchString, int? page)
         {
-            var adminUsers = db.AdminUsers.Include(a => a.Job_title1);
-            return View(adminUsers.ToList());
+            //var products = db.products.where(n => n.namepro.contains(searchstring)).tolist();
+            //return view(products);
+            var lstAdminUsers = new List<AdminUser>();
+            if (SearchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                SearchString = currentFilter;
+            }
+            if (!string.IsNullOrEmpty(SearchString))
+            {
+                lstAdminUsers = db.AdminUsers.Where(n => n.FullName.Contains(SearchString)).ToList();
+            }
+            else
+            {
+                lstAdminUsers= db.AdminUsers.ToList();
+            }
+            ViewBag.CurrentProduct = SearchString;
+            int pageSize = 6;
+            int pageNumber = (page ?? 1);
+            lstAdminUsers = lstAdminUsers.OrderByDescending(n => n.Id).ToList();
+            return View(lstAdminUsers.ToPagedList(pageNumber, pageSize));
         }
 
         // GET: AdminUsers/Details/5
